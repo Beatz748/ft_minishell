@@ -6,11 +6,35 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 00:00:22 by kshantel          #+#    #+#             */
-/*   Updated: 2020/10/20 00:00:23 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/10/20 16:29:18 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	*ft_strdup(const char *s)
+{
+	char	*str;
+	char	*str2;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	str2 = (char *)s;
+	while (str2[i] != '\0')
+		i++;
+	str = (char*)malloc(sizeof(*str2) * (i + 1));
+	if (!str)
+		return (NULL);
+	while (j < i)
+	{
+		str[j] = str2[j];
+		j++;
+	}
+	str[j] = '\0';
+	return (str);
+}
 
 size_t	ft_strlen(const char *s)
 {
@@ -60,7 +84,7 @@ int		get_next_line(int fd, char **line)
 	if (!(*line = malloc(1)))
 		return (-1);
 	**line = 0;
-	while ((sr = read(fd, buf, 1)))
+	while ((sr = read(fd, buf, 1)) > 0)
 	{
 		if (*buf != '\n')
 		{

@@ -18,12 +18,23 @@ void	ft_exec(char **full)
 
 
 	pid = fork();
-	char *args[] = {"ls", 0};
-	if (pid == 0)
-		execve("/bin/ls", args, NULL);
-	else if (pid < 0)
+	char *args[] = {"ls", "-aF", "/", 0};
+	if (pid == -1)
 		ft_error(1);
-	wait(&pid);
+	else if (pid > 0)
+	{
+		waitpid(pid, &status, 0);
+	}
+	if (execve("/bin/ls", args, NULL) == -1)
+			ft_error(1);
+	if (ft_strcmp("cd", (char *)full[0]))
+		chdir(full[1]);
+	if (pid < 0)
+	{
+		wpid = waitpid(pid, &status, WUNTRACED);
+
+	}
+	while (!WIFEXITED(status) && !WIFSIGNALED(status));
 }
 
 void	ft_minishell(void)
