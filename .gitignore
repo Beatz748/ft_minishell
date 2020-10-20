@@ -57,3 +57,5 @@ pft/
 .vscode
 .a.out.dSYM
 main.dSYM
+
+.gitignore
