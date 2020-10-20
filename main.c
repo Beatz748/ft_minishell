@@ -1,9 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/20 14:07:37 by kshantel          #+#    #+#             */
+/*   Updated: 2020/10/20 14:07:38 by kshantel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
-#define RESET   "\033[0m"
-#define RED     "\033[1;31m"
-#define YELLOW  "\033[1;33m"
-#define WHITE   "\033[1;37m"
-#include <stdio.h>
+
 int		main(int ac, char **av, char **env)
 {
 	int	i;
