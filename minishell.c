@@ -11,6 +11,19 @@ int	ft_strcmp(char *s1, char *s2)
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
+void	ft_do_cd(char **full)
+{
+	chdir(full[1]);
+}
+
+void	ft_exec_command(char **full)
+{
+	if (!(ft_strcmp(full[0], "cd")))
+		chdir(full[1]);
+	else
+		execve("/bin/pwd", full, NULL);
+}
+
 void	ft_exec(char **full)
 {
 	pid_t	pid, wpid;
@@ -20,7 +33,7 @@ void	ft_exec(char **full)
 	pid = fork();
 	char *args[] = {"ls", 0};
 	if (pid == 0)
-		execve("/bin/ls", args, NULL);
+		ft_exec_command(full);
 	else if (pid < 0)
 		ft_error(1);
 	wait(&pid);
@@ -37,11 +50,6 @@ void	ft_minishell(void)
 	{
 		signal(SIGINT, ft_signals);
 		signal(SIGQUIT, ft_signals);
-		char *str[4];
-		str[0] = "ls";
-		str[1] = "-aF";
-		str[2] = "/";
-		str[3] = 0;
 		write(1, "\033[0;36m Σ>―(〃°ω°〃)♡→ \033[0;35m", 43);
 		write(1, getcwd(NULL, 0), ft_strlen(getcwd(NULL, 0)));
 		write(1, ">\033[0m ", 7);
