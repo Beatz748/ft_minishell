@@ -20,8 +20,13 @@ void	ft_exec_command(char **full)
 {
 	if (!(ft_strcmp(full[0], "cd")))
 		chdir(full[1]);
+	else if (!(ft_strcmp(full[0], "pwd")))
+	{
+		write(1, getcwd(NULL, 0), ft_strlen(getcwd(NULL, 0)));
+		write(1, "\n", 1);
+	}
 	else
-		execve("/bin/pwd", full, NULL);
+		execve("/bin/ls", full, g_env);
 }
 
 void	ft_exec(char **full)
@@ -31,7 +36,6 @@ void	ft_exec(char **full)
 
 
 	pid = fork();
-	char *args[] = {"ls", 0};
 	if (pid == 0)
 		ft_exec_command(full);
 	else if (pid < 0)
