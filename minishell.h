@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 23:58:13 by kshantel          #+#    #+#             */
-/*   Updated: 2020/10/20 19:14:58 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/10/23 20:31:18 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,33 @@
 # define EXPORT_CMD "export"
 # define UNSET_CMD "unset"
 
-char	**g_env;
+
+typedef struct		s_list
+{
+	void			*content;
+	void			*name;
+	struct s_list	*next;
+}					t_list;
+
+t_list	*g_env;
 
 void	ft_error(int i);
+
+t_list	*ft_parse_env(char **env);
+
+char	*ft_strchr(const char *s, int c);
+
+t_list		*ft_lstnew(void *content, void *name);
+
+t_list		*ft_lstlast(t_list *lst);
+
+void		ft_lstadd_back(t_list **lst, t_list *new);
+
+int			ft_lstsize(t_list *lst);
+
+t_list		*ft_lst_pevlast(t_list *lst);
+
+void		ft_lstadd_prev_back(t_list **lst, t_list *new);
 
 size_t	ft_strlen(const char *s);
 

@@ -1,6 +1,7 @@
 #include "minishell.h"
 #include <stdio.h>
 
+
 int	ft_strcmp(char *s1, char *s2)
 {
 	int	i;
@@ -16,8 +17,11 @@ void	ft_do_cd(char **full)
 	chdir(full[1]);
 }
 
-void	ft_exec_command(char **full)
+void	ft_our_commands(char **full)
 {
+	int i = 1;
+	char *p_e = NULL;
+
 	if (!(ft_strcmp(full[0], "cd")))
 		chdir(full[1]);
 	else if (!(ft_strcmp(full[0], "pwd")))
@@ -25,8 +29,25 @@ void	ft_exec_command(char **full)
 		write(1, getcwd(NULL, 0), ft_strlen(getcwd(NULL, 0)));
 		write(1, "\n", 1);
 	}
+	else if (!(ft_strcmp(full[0], "export")))
+	{
+		while (full[i])
+		{
+			p_e = ft_strchr(full[i], '=');
+			*p_e = '\0';
+			ft_lstadd_prev_back(&g_env, ft_lstnew(++p_e, full[i]));
+			i++;
+		}
+	}
 	else
-		execve("/bin/ls", full, g_env);
+	{
+			t_list *tmp = g_env;
+	while (tmp)
+	{
+		printf("%s=%s\n", (char*)(tmp->name), (char *)(tmp->content));
+		tmp = tmp->next;
+	}
+	}
 }
 
 void	ft_exec(char **full)
@@ -34,10 +55,9 @@ void	ft_exec(char **full)
 	pid_t	pid, wpid;
 	int		status;
 
-
 	pid = fork();
 	if (pid == 0)
-		ft_exec_command(full);
+		ft_our_commands(full);
 	else if (pid < 0)
 		ft_error(1);
 	wait(&pid);
