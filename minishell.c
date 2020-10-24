@@ -27,12 +27,33 @@ size_t ft_strlen2(char **full)
 	return (len);
 }
 
-void	ft_do_cd(char **full)
+void	ft_putstr_fd(char *s, int fd)
 {
-	chdir(full[1]);
+	size_t	i;
+
+	i = 0;
+	if (!s)
+		return ;
+	while (s[i] != '\0')
+	{
+		write(fd, &(s[i]), 1);
+		i++;
+	}
 }
 
-void	ft_printf_env(void)
+void	ft_putendl_fd(char *s, int fd)
+{
+	ft_putstr_fd(s, fd);
+	write(fd, "\n", 1);
+}
+
+int		ft_do_cd(char **full)
+{
+	chdir(full[1]);
+	return (0);
+}
+
+int		ft_printf_env(void)
 {
 	t_list *tmp;
 
@@ -42,9 +63,10 @@ void	ft_printf_env(void)
 		printf("%s=%s\n", tmp->name, tmp->content);
 		tmp = tmp->next;
 	}
+	return (0);
 }
 
-void	ft_unset(char **full)
+int		ft_unset(char **full)
 {
 	int i;
 	t_list *tmp, *srch;
@@ -68,9 +90,10 @@ void	ft_unset(char **full)
 			i++;
 		}
 	}
+	return (0);
 }
 
-void	ft_export(char **full)
+int		ft_export(char **full)
 {
 	char *p_e;
 	t_list *tmp;
@@ -98,43 +121,79 @@ void	ft_export(char **full)
 		}
 		i++;
 	}
+	return (0);
 }
 
-void	ft_our_commands(char **full)
+int		ft_exec_cd(char **full)
+{
+	if (ft_strlen2(full) > 2)
+		printf("cd: too many arguments\n");
+	else if (chdir(full[1]) == -1)
+		printf("cd: no such file or directory: %s\n", full[1]);
+	return (0);
+}
+
+int		ft_exec_pwd(char **full)
+{
+	write(1, getcwd(NULL, 0), ft_strlen(getcwd(NULL, 0)));
+	write(1, "\n", 1);
+	return (0);
+}
+
+int		ft_exit(char **full)
+{
+	exit(0);
+	return (0);
+}
+
+int		ft_echo(char **full)
+{
+	full++;
+	while (*full)
+	{
+		ft_putstr_fd(*full, 1);
+		full++;
+	}
+	write(1, "\n", 1);
+	return (0);
+}
+int		ft_check_builtin(char **full)
 {
 	if (!(ft_strcmp(full[0], "cd")))
-	{
-		if (ft_strlen2(full) > 2)
-			printf("cd: too many arguments\n");
-		else if (chdir(full[1]) == -1)
-			printf("cd: no such file or directory: %s\n", full[1]);
-	}
+		return (ft_exec_cd(full));
 	else if (!(ft_strcmp(full[0], "pwd")))
-	{
-		write(1, getcwd(NULL, 0), ft_strlen(getcwd(NULL, 0)));
-		write(1, "\n", 1);
-	}
+		return (ft_exec_pwd(full));
 	else if(!(ft_strcmp(full[0], "env")))
-		ft_printf_env();
+		return (ft_printf_env());
 	else if (!(ft_strcmp(full[0], "export")))
-		ft_export(full);
+		return (ft_export(full));
 	else if (!(ft_strcmp(full[0], "unset")))
-		ft_unset(full);
-	else
-		printf("minishell: command not found\n");
+		return (ft_unset(full));
+	else if (!(ft_strcmp(full[0], "echo")))
+		return (ft_echo(full));
+	else if (!(ft_strcmp(full[0], "exit")))
+		return (ft_exit(full));
+	return (1);
 }
 
-void	ft_exec(char **full)
+void	ft_nobuiltin(char **full)
 {
-	pid_t	pid, wpid;
+	pid_t	pid;
+	pid_t	wpid;
 	int		status;
 
 	pid = fork();
 	if (pid == 0)
-		ft_our_commands(full);
+		execve("/bin/ls", full, NULL);
 	else if (pid < 0)
 		ft_error(1);
 	wait(&pid);
+}
+
+void	ft_exec(char **full)
+{
+	if ((ft_check_builtin(full)))
+		ft_nobuiltin(full);
 }
 
 void	ft_minishell(void)
