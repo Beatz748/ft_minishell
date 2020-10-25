@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 23:58:13 by kshantel          #+#    #+#             */
-/*   Updated: 2020/10/23 20:31:18 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/10/25 01:57:55 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <string.h>
 # include <stdio.h>
 # include <dirent.h>
+# include <sys/types.h>
+# include <sys/stat.h>
 # include <signal.h>
 # include <errno.h>
 

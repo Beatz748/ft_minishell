@@ -1,7 +1,6 @@
 #include "minishell.h"
 #include <stdio.h>
 
-
 int	ft_strcmp(char *s1, char *s2)
 {
 	int	i;
@@ -176,15 +175,52 @@ int		ft_check_builtin(char **full)
 	return (1);
 }
 
+char	**ft_path()
+{
+	t_list	*tmp;
+	char	**my_path;
+
+	tmp = g_env;
+	while (tmp->next && ((ft_strcmp(tmp->name, "PATH"))))
+		tmp = tmp->next;
+	if (!(ft_strcmp(tmp->name, "PATH")))
+		return (my_path = ft_split(tmp->content, ':'));
+	return (NULL);
+}
+
+char	*ft_true_path(char **full)
+{
+	struct stat buf;
+	char	**my_path;
+	char	*full_path;
+
+	my_path = ft_path();
+	while (my_path && ((buf.st_mode & S_IFMT) != S_IFREG))
+	{
+	full_path = ft_strjoin(*my_path++, "/");
+	full_path = ft_strjoin(full_path, full[0]);
+	stat(full_path, &buf);
+	}
+	if ((buf.st_mode & S_IFMT) == S_IFREG)
+		return (full_path);
+	else if (stat(full[0], &buf))
+		return (full[0]);
+	return (NULL);
+}
+
+
+
 void	ft_nobuiltin(char **full)
 {
 	pid_t	pid;
 	pid_t	wpid;
 	int		status;
+	char	**my_path;
 
+	my_path = ft_path();
 	pid = fork();
 	if (pid == 0)
-		execve("/bin/ls", full, NULL);
+		execve(ft_true_path(full), full, NULL);
 	else if (pid < 0)
 		ft_error(1);
 	wait(&pid);
