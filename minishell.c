@@ -193,18 +193,25 @@ char	*ft_true_path(char **full)
 	struct stat buf;
 	char	**my_path;
 	char	*full_path;
+	char	*tmp;
 
-	my_path = ft_path();
+	if(!(my_path = ft_path()))
+		return (NULL);
 	while (my_path && ((buf.st_mode & S_IFMT) != S_IFREG))
 	{
-	full_path = ft_strjoin(*my_path++, "/");
-	full_path = ft_strjoin(full_path, full[0]);
-	stat(full_path, &buf);
+		if (full_path)
+			free(full_path);
+		full_path = ft_strjoin(*my_path++, "/");
+		tmp = full_path;
+		full_path = ft_strjoin(full_path, full[0]);
+		free(tmp);
+		stat(full_path, &buf);
 	}
 	if ((buf.st_mode & S_IFMT) == S_IFREG)
 		return (full_path);
-	else if (stat(full[0], &buf))
-		return (full[0]);
+	free(full_path);
+	// if (stat(full[0], &buf))
+	// 	return (full[0]);
 	return (NULL);
 }
 
@@ -216,11 +223,17 @@ void	ft_nobuiltin(char **full)
 	pid_t	wpid;
 	int		status;
 	char	**my_path;
+	char *tmp;
 
 	my_path = ft_path();
 	pid = fork();
 	if (pid == 0)
-		execve(ft_true_path(full), full, NULL);
+	{
+		tmp = ft_true_path(full);
+		execve(tmp, full, NULL);
+		if (tmp)
+			free(tmp);
+	}
 	else if (pid < 0)
 		ft_error(1);
 	wait(&pid);
@@ -238,7 +251,7 @@ void	ft_minishell(void)
 	char	*cmd;
 	char	**full;
 
-	i = 1;
+	i = 0;
 	while (1)
 	{
 		signal(SIGINT, ft_signals);
@@ -249,5 +262,9 @@ void	ft_minishell(void)
 		get_next_line(0, &cmd);
 		full = ft_split(cmd, ' ');
 		ft_exec(full);
+
+		while (full[i])
+			free(full[i++]);
+		free(full);
 	}
 }
