@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 23:58:13 by kshantel          #+#    #+#             */
-/*   Updated: 2020/10/25 01:57:55 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/10/28 16:57:08 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,8 @@
 # define MINISHELL_H
 
 # include <stdlib.h>
-# include <fcntl.h>
 # include <unistd.h>
-# include <stdarg.h>
-# include <string.h>
 # include <stdio.h>
-# include <dirent.h>
-# include <sys/types.h>
 # include <sys/stat.h>
 # include <signal.h>
 # include <errno.h>
@@ -33,6 +28,7 @@
 # define EXPORT_CMD "export"
 # define UNSET_CMD "unset"
 
+# define max_dir 1024
 
 typedef struct		s_list
 {

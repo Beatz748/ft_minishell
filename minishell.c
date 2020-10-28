@@ -215,7 +215,15 @@ char	*ft_true_path(char **full)
 	return (NULL);
 }
 
+void	ft_full_free(char **my_path)
+{
+	int		i;
 
+	i = 0;
+	while (my_path[i])
+		free(my_path[i++]);
+	free(my_path);
+}
 
 void	ft_nobuiltin(char **full)
 {
@@ -237,6 +245,7 @@ void	ft_nobuiltin(char **full)
 	else if (pid < 0)
 		ft_error(1);
 	wait(&pid);
+	ft_full_free(my_path);
 }
 
 void	ft_exec(char **full)
@@ -250,6 +259,7 @@ void	ft_minishell(void)
 	int 	i;
 	char	*cmd;
 	char	**full;
+	char	dir[max_dir];
 
 	i = 0;
 	while (1)
@@ -257,14 +267,11 @@ void	ft_minishell(void)
 		signal(SIGINT, ft_signals);
 		signal(SIGQUIT, ft_signals);
 		write(1, "\033[0;36m Σ>―(〃°ω°〃)♡→ \033[0;35m", 43);
-		write(1, getcwd(NULL, 0), ft_strlen(getcwd(NULL, 0)));
+		write(1, getcwd(dir, max_dir), ft_strlen(getcwd(dir, max_dir)));
 		write(1, ">\033[0m ", 7);
 		get_next_line(0, &cmd);
 		full = ft_split(cmd, ' ');
 		ft_exec(full);
-
-		while (full[i])
-			free(full[i++]);
-		free(full);
+		free(cmd);
 	}
 }
