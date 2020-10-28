@@ -273,5 +273,9 @@ void	ft_minishell(void)
 		full = ft_split(cmd, ' ');
 		ft_exec(full);
 		free(cmd);
+		while (full[i])
+			free(full[i++]);
+		free(full);
+		i = 0;
 	}
 }
