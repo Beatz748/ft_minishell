@@ -123,10 +123,26 @@ int		ft_export(char **full)
 	return (0);
 }
 
+char	*ft_get_gome()
+{
+	t_list	*tmp;
+	char	*home;
+
+	tmp = g_env;
+	while (tmp && (ft_strcmp(tmp->name, "HOME")))
+		tmp = tmp->next;
+	if (tmp)
+		home = tmp->content;
+	return (home);
+}
+
 int		ft_exec_cd(char **full)
 {
+
 	if (ft_strlen2(full) > 2)
 		printf("cd: too many arguments\n");
+	if (!(full[1]))
+		chdir(ft_get_gome());
 	else if (chdir(full[1]) == -1)
 		printf("cd: no such file or directory: %s\n", full[1]);
 	return (0);
