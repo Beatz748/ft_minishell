@@ -240,6 +240,22 @@ void	ft_full_free(char **my_path)
 	free(my_path);
 }
 
+void	ft_minishell2(char **full)
+{
+	char	*path;
+	char	dir[max_dir];
+
+	path = getcwd(dir, max_dir);
+	path = ft_strjoin(path, "/");
+	path = ft_strjoin(path, full[0] + 2);
+	if (execve(path, full, NULL) == -1)
+	{
+		printf("%s\n", path);
+		ft_error(2, full);
+		_exit(42);
+	}
+}
+
 void	ft_nobuiltin(char **full)
 {
 	int status;
@@ -255,7 +271,11 @@ void	ft_nobuiltin(char **full)
 	{
 		waitpid(pid, &status, 0);
 	} else {
-		my_path = ft_true_path(full);
+		if ((my_path = ft_true_path(full)) == NULL)
+		{
+			ft_minishell2(full);
+			return;
+		}
 		if (execve(my_path, full, NULL) == -1)
 		{
 			ft_error(2, full);
