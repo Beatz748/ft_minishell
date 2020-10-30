@@ -193,14 +193,14 @@ int		ft_check_builtin(char **full)
 
 char	**ft_path()
 {
-	t_list	*tmp;
-	char	**my_path;
+	t_list	*tm;
+	char	**my_pat;
 
-	tmp = g_env;
-	while (tmp->next && ((ft_strcmp(tmp->name, "PATH"))))
-		tmp = tmp->next;
-	if (!(ft_strcmp(tmp->name, "PATH")))
-		return (my_path = ft_split(tmp->content, ':'));
+	tm = g_env;
+	while (tm->next && ((ft_strcmp(tm->name, "PATH"))))
+		tm = tm->next;
+	if (!(ft_strcmp(tm->name, "PATH")))
+		return (my_pat = ft_split(tm->content, ':'));
 	return (NULL);
 }
 
@@ -213,7 +213,8 @@ char	*ft_true_path(char **full)
 
 	if(!(my_path = ft_path()))
 		return (NULL);
-	while (my_path && ((buf.st_mode & S_IFMT) != S_IFREG))
+	full_path = NULL;
+	while (*my_path && ((buf.st_mode & S_IFMT) != S_IFREG))
 	{
 		if (full_path)
 			free(full_path);
@@ -226,8 +227,6 @@ char	*ft_true_path(char **full)
 	if ((buf.st_mode & S_IFMT) == S_IFREG)
 		return (full_path);
 	free(full_path);
-	// if (stat(full[0], &buf))
-	// 	return (full[0]);
 	return (NULL);
 }
 
@@ -243,29 +242,33 @@ void	ft_full_free(char **my_path)
 
 void	ft_nobuiltin(char **full)
 {
-	pid_t	pid;
-	pid_t	wpid;
-	int		status;
-	char	**my_path;
-	char *tmp;
+	int status;
+	char *my_path;
+	pid_t pid;
 
-	my_path = ft_path();
+	my_path = NULL;
+
 	pid = fork();
-	if (pid == 0)
+	if (pid == -1)
+		printf("Unable to fork\n");
+	else if (pid > 0)
 	{
-		tmp = ft_true_path(full);
-		execve(tmp, full, NULL);
-		if (tmp)
-			free(tmp);
+		waitpid(pid, &status, 0);
+	} else {
+		my_path = ft_true_path(full);
+		if (execve(my_path, full, NULL) == -1)
+		{
+			ft_error(2, full);
+			_exit(42);
+		}
 	}
-	else if (pid < 0)
-		ft_error(1);
-	wait(&pid);
-	ft_full_free(my_path);
+	free(my_path);
 }
 
 void	ft_exec(char **full)
 {
+	if (full[0] == NULL)
+		return;
 	if ((ft_check_builtin(full)))
 		ft_nobuiltin(full);
 }

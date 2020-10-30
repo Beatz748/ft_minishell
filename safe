@@ -213,6 +213,7 @@ char	*ft_true_path(char **full)
 
 	if(!(my_path = ft_path()))
 		return (NULL);
+	full_path = NULL;
 	while (my_path && ((buf.st_mode & S_IFMT) != S_IFREG))
 	{
 		if (full_path)
@@ -241,28 +242,26 @@ void	ft_full_free(char **my_path)
 
 void	ft_nobuiltin(char **full)
 {
-	pid_t	pid;
-	pid_t	wpid;
-	int		status;
-	char	**my_path;
-	char *tmp;
+	int status;
+	char *my_path;
 
-	my_path = ft_path();
-	tmp = ft_true_path(full);
-	printf("%s\n\n", tmp);
-	// if (tmp != NULL)
-	// 	ft_putstr_fd("test\n", 1);
+	my_path = ft_true_path(full);
+	pid_t pid;
+
 	pid = fork();
-	if (pid == 0)
+	if (pid == -1)
+		printf("Unable to fork\n");
+	else if (pid > 0)
 	{
-		execve(tmp, full, NULL);
-		if (tmp)
-			free(tmp);
+		int status;
+		waitpid(pid, &status, 0);
+		printf("\n");
+	} else {
+		if (execve(my_path, full, NULL) == -1) {
+			printf("Unable to exec\n");
+			_exit(42);
+		}
 	}
-	else if (pid < 0)
-		ft_error(1);
-	wait(&pid);
-	ft_full_free(my_path);
 }
 
 void	ft_exec(char **full)

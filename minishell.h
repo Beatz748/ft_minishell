@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 23:58:13 by kshantel          #+#    #+#             */
-/*   Updated: 2020/10/28 20:11:15 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/10/30 18:14:25 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct		s_list
 
 t_list	*g_env;
 
-void	ft_error(int i);
+void	ft_error(int i, char **full);
 
 t_list	*ft_parse_env(char **env);
 
@@ -54,6 +54,8 @@ void		ft_lstadd_back(t_list **lst, t_list *new);
 int			ft_lstsize(t_list *lst);
 
 t_list		*ft_lst_pevlast(t_list *lst);
+
+void	ft_putstr_fd(char *s, int fd);
 
 void		ft_lstadd_prev_back(t_list **lst, t_list *new);
 

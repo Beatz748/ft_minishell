@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 14:07:37 by kshantel          #+#    #+#             */
-/*   Updated: 2020/10/23 20:33:54 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/10/29 20:10:37 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,12 +126,6 @@ t_list	*ft_parse_env(char **env)
 int		main(int ac, char **av, char **env)
 {
 	g_env = ft_parse_env(env);
-	// t_list *tmp = g_env;
-	// while (tmp)
-	// {
-	// 	printf("%s=%s\n", (char*)(tmp->name), (char *)(tmp->content));
-	// 	tmp = tmp->next;
-	// }
 	write(1, "\033[0;31mpizza-shell ", 20);
 	write(1, "BY TBEEDRIL && KSHANTEL 🍕 \033[0m \n\n\n", 38);
 	ft_minishell();
