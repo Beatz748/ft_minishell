@@ -250,7 +250,6 @@ void	ft_minishell2(char **full)
 	path = ft_strjoin(path, full[0] + 2);
 	if (execve(path, full, NULL) == -1)
 	{
-		printf("%s\n", path);
 		ft_error(2, full);
 		_exit(42);
 	}
@@ -293,6 +292,32 @@ void	ft_exec(char **full)
 		ft_nobuiltin(full);
 }
 
+void	ft_checking(char *cmd)
+{
+	char	**full;
+	int		i;
+
+	i = 0;
+	while (cmd[i])
+	{
+		if (cmd[i] == ';')
+		{
+			cmd[i] = 0;
+			full = ft_split(cmd, ' ');
+			ft_exec(full);
+			cmd += i + 1;
+			i = 0;
+		}
+		i++;
+	}
+	if (cmd[i] == 0)
+	{
+		full = ft_split(cmd, ' ');
+		ft_exec(full);
+	}
+}
+
+
 void	ft_minishell(void)
 {
 	int 	i;
@@ -309,12 +334,8 @@ void	ft_minishell(void)
 		write(1, getcwd(dir, max_dir), ft_strlen(getcwd(dir, max_dir)));
 		write(1, ">\033[0m ", 7);
 		get_next_line(0, &cmd);
-		full = ft_split(cmd, ' ');
-		ft_exec(full);
+		ft_checking(cmd);
 		free(cmd);
-		while (full[i])
-			free(full[i++]);
-		free(full);
 		i = 0;
 	}
 }
