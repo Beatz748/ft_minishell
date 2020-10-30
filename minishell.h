@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 23:58:13 by kshantel          #+#    #+#             */
-/*   Updated: 2020/10/30 18:14:25 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/10/30 22:48:58 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ t_list	*ft_parse_env(char **env);
 char	*ft_strchr(const char *s, int c);
 
 t_list		*ft_lstnew(void *content, void *name);
+
+int	ft_strcmp(char *s1, char *s2);
+
+size_t ft_strlen2(char **full);
 
 t_list		*ft_lstlast(t_list *lst);
 
