@@ -9,7 +9,7 @@ int		ft_do_cd(char **full)
 
 int		ft_printf_env(void)
 {
-	t_list *tmp;
+	t_list2 *tmp;
 
 	tmp = g_env;
 	while (tmp)
@@ -23,7 +23,7 @@ int		ft_printf_env(void)
 int		ft_unset(char **full)
 {
 	int i;
-	t_list *tmp, *srch;
+	t_list2 *tmp, *srch;
 
 	i = 1;
 	while (full[i])
@@ -50,7 +50,7 @@ int		ft_unset(char **full)
 int		ft_export(char **full)
 {
 	char *p_e;
-	t_list *tmp;
+	t_list2 *tmp;
 	int i;
 
 	i = 1;
@@ -68,7 +68,7 @@ int		ft_export(char **full)
 		while (tmp && ft_strcmp(tmp->name, full[i]) != 0)
 			tmp = tmp->next;
 		if (!tmp)
-			ft_lstadd_prev_back(&g_env, ft_lstnew(p_e, full[i]));
+			ft_lstadd_prev_back(&g_env, ft_lstnew_env(p_e, full[i]));
 		else
 		{
 			tmp->content = p_e;
@@ -80,7 +80,7 @@ int		ft_export(char **full)
 
 char	*ft_get_gome()
 {
-	t_list	*tmp;
+	t_list2	*tmp;
 	char	*home;
 
 	tmp = g_env;
@@ -119,7 +119,7 @@ int		ft_exit(char **full)
 int		ft_echo(char **full)
 {
 	full++;
-	while (*full)
+	while (*full != NULL)
 	{
 		ft_putstr_fd(*full, 1);
 		full++;
@@ -148,7 +148,7 @@ int		ft_check_builtin(char **full)
 
 char	**ft_path()
 {
-	t_list	*tm;
+	t_list2	*tm;
 	char	**my_pat;
 
 	tm = g_env;
@@ -253,23 +253,29 @@ void	ft_checking(char *cmd)
 	int		i;
 
 	i = 0;
-	while (cmd[i])
-	{
-		if (cmd[i] == ';')
-		{
-			cmd[i] = 0;
-			full = ft_split(cmd, ' ');
-			ft_exec(full);
-			cmd += i + 1;
-			i = 0;
-		}
-		i++;
-	}
-	if (cmd[i] == 0)
-	{
-		full = ft_split(cmd, ' ');
+	// while (cmd[i])
+	// {
+	// 	if (cmd[i] == ';')
+	// 	{
+	// 		cmd[i] = 0;
+	// 		full = ft_split(cmd, ' ');
+	// 		ft_exec(full);
+	// 		cmd += i + 1;
+	// 		i = 0;
+	// 	}
+	// 	i++;
+	// }
+	// if (cmd[i] == 0)
+	// {
+		full = ft_parse(cmd);
 		ft_exec(full);
-	}
+		while (full[i])
+			printf("%s\n", full[i++]);
+		i = 0;
+		while (full[i])
+			free(full[i++]);
+		free(full);
+	// }
 }
 
 
@@ -289,8 +295,8 @@ void	ft_minishell(void)
 		write(1, getcwd(dir, max_dir), ft_strlen(getcwd(dir, max_dir)));
 		write(1, ">\033[0m ", 7);
 		get_next_line(0, &cmd);
+		// cmd = "grep 'Susan Topple' phonebook.txt";
 		ft_checking(cmd);
-		free(cmd);
 		i = 0;
 	}
 }

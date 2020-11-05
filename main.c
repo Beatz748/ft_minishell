@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 14:07:37 by kshantel          #+#    #+#             */
-/*   Updated: 2020/10/29 20:10:37 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/11/04 20:49:57 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-t_list		*ft_lstnew(void *content, void *name)
+t_list2		*ft_lstnew_env(void *content, void *name)
 {
-	t_list	*new;
+	t_list2	*new;
 
-	new = (t_list *)malloc(sizeof(t_list));
+	new = (t_list2 *)malloc(sizeof(t_list2));
 	if (new == NULL)
 		return (NULL);
 	new->content = content;
@@ -39,7 +39,7 @@ t_list		*ft_lstnew(void *content, void *name)
 	return (new);
 }
 
-t_list		*ft_lstlast(t_list *lst)
+t_list2		*ft_lstlast_env(t_list2 *lst)
 {
 	if (lst == NULL)
 		return (NULL);
@@ -48,9 +48,9 @@ t_list		*ft_lstlast(t_list *lst)
 	return (lst);
 }
 
-void		ft_lstadd_back(t_list **lst, t_list *new)
+void		ft_lstadd_back_env(t_list2 **lst, t_list2 *new)
 {
-	t_list	*last;
+	t_list2	*last;
 
 	if (lst == NULL || new == NULL)
 		return ;
@@ -59,12 +59,12 @@ void		ft_lstadd_back(t_list **lst, t_list *new)
 		*lst = new;
 		return ;
 	}
-	last = ft_lstlast(*lst);
+	last = ft_lstlast_env(*lst);
 	new->next = last->next;
 	last->next = new;
 }
 
-t_list		*ft_lst_prevlast(t_list *lst)
+t_list2		*ft_lst_prevlast(t_list2 *lst)
 {
 	if (lst == NULL)
 		return (NULL);
@@ -73,9 +73,9 @@ t_list		*ft_lst_prevlast(t_list *lst)
 	return (lst);
 }
 
-void		ft_lstadd_prev_back(t_list **lst, t_list *new)
+void		ft_lstadd_prev_back(t_list2 **lst, t_list2 *new)
 {
-	t_list	*last;
+	t_list2	*last;
 
 	if (lst == NULL || new == NULL)
 		return ;
@@ -89,7 +89,7 @@ void		ft_lstadd_prev_back(t_list **lst, t_list *new)
 	last->next = new;
 }
 
-int			ft_lstsize(t_list *lst)
+int			ft_lstsize_env(t_list2 *lst)
 {
 	int		count;
 
@@ -103,9 +103,9 @@ int			ft_lstsize(t_list *lst)
 }
 
 
-t_list	*ft_parse_env(char **env)
+t_list2	*ft_parse_env(char **env)
 {
-	t_list	*my_env = NULL;
+	t_list2	*my_env = NULL;
 	int i;
 	char *p;
 
@@ -115,7 +115,7 @@ t_list	*ft_parse_env(char **env)
 	{
 		p = ft_strchr(env[i], '=');
 		*p = '\0';
-		ft_lstadd_back(&my_env, ft_lstnew(++p, env[i]));
+		ft_lstadd_back_env(&my_env, ft_lstnew_env(++p, env[i]));
 	//	printf("%s\n", (char*)my_env->name);
 		i++;
 	}
