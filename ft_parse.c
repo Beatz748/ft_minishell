@@ -101,7 +101,9 @@ void	ft_new_1quo(char **new, t_list **tmp, int *res)
 	}
 	str = ft_strndup(*new - wordlen, wordlen);
 	ft_lstadd_back(tmp, ft_lstnew(str));
-	if (++*new)
+	if (**new)
+		*new += 1;
+	if (*new)
 		*res += words_get(new, tmp);
 }
 
@@ -119,7 +121,9 @@ void	ft_new_word(char **new, t_list **tmp, int *res)
 	}
 	str = ft_strndup(*new - wordlen, wordlen);
 	ft_lstadd_back(tmp, ft_lstnew(str));
-	if (++*new)
+	if (**new)
+		*new += 1;
+	if (*new)
 		*res += words_get(new, tmp);
 }
 
@@ -223,7 +227,6 @@ char	**ft_parse(char *line)
 	while(i < size && tmp)
 	{
 		full[i] = ft_strdup(tmp->content);
-		free(tmp->content);
 		tmp = tmp->next;
 		i++;
 	}
