@@ -256,17 +256,16 @@ void	ft_checking(char *cmd)
 		full = ft_parse(cmd);
 		ft_exec(full);
 		i = 0;
-		while (full[i])
-			free(full[i++]);
-		free(full);
+		// while (full[i])
+		// 	free(full[i++]);
+		// free(full);
 }
-# include <fcntl.h>
+
 void	ft_minishell(void)
 {
 	int 	i;
 	char	*cmd;
 	char	**full;
-	int fd;
 	char	dir[max_dir];
 
 	i = 0;
@@ -274,11 +273,11 @@ void	ft_minishell(void)
 	{
 		signal(SIGINT, ft_signals);
 		signal(SIGQUIT, ft_signals);
-		// fd = open("te", O_RDONLY);
 		write(1, "\033[0;36m Σ>―(〃°ω°〃)♡→ \033[0;35m", 43);
 		write(1, getcwd(dir, max_dir), ft_strlen(getcwd(dir, max_dir)));
 		write(1, ">\033[0m ", 7);
 		get_next_line(0, &cmd);
+		// cmd = "ls -la;ls";
 		ft_checking(cmd);
 		free(cmd);
 	}

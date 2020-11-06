@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 23:58:13 by kshantel          #+#    #+#             */
-/*   Updated: 2020/11/05 03:49:51 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/11/06 18:08:05 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct		s_list2
 typedef struct		s_list
 {
 	void			*content;
+	int				argument;
 	struct s_list	*next;
 }					t_list;
 
@@ -53,6 +54,8 @@ void	ft_error(int i, char **full);
 t_list2	*ft_parse_env(char **env);
 
 char	*ft_strchr(const char *s, int c);
+
+void	ft_exec(char **full);
 
 t_list2		*ft_lstnew_env(void *content, void *name);
 
@@ -96,7 +99,7 @@ int words_get(char **s, t_list **tmp);
 
 char	**ft_parse(char *line);
 
-t_list		*ft_lstnew(void *content);
+t_list		*ft_lstnew(void *content, int flag);
 
 void		ft_lstadd_prev_back(t_list2 **lst, t_list2 *new);
 

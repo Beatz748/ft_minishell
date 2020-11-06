@@ -36,7 +36,7 @@ char	*ft_strndup(const char *s, size_t n)
 	return (res);
 }
 
-t_list		*ft_lstnew(void *content)
+t_list		*ft_lstnew(void *content, int flag)
 {
 	t_list	*new;
 
@@ -44,6 +44,7 @@ t_list		*ft_lstnew(void *content)
 	if (new == NULL)
 		return (NULL);
 	new->content = content;
+	new->argument = flag;
 	new->next = NULL;
 	return (new);
 }
@@ -100,7 +101,7 @@ void	ft_new_1quo(char **new, t_list **tmp, int *res)
 		wordlen += 1;
 	}
 	str = ft_strndup(*new - wordlen, wordlen);
-	ft_lstadd_back(tmp, ft_lstnew(str));
+	ft_lstadd_back(tmp, ft_lstnew(str, 0));
 	if (**new)
 		*new += 1;
 	if (*new)
@@ -120,9 +121,7 @@ void	ft_new_word(char **new, t_list **tmp, int *res)
 		wordlen += 1;
 	}
 	str = ft_strndup(*new - wordlen, wordlen);
-	ft_lstadd_back(tmp, ft_lstnew(str));
-	if (**new)
-		*new += 1;
+	ft_lstadd_back(tmp, ft_lstnew(str, 0));
 	if (*new)
 		*res += words_get(new, tmp);
 }
@@ -141,7 +140,7 @@ void	ft_new_2quo(char **new, t_list **tmp, int *res)
 		wordlen += 1;
 	}
 	str = ft_strndup(*new - wordlen, wordlen);
-	ft_lstadd_back(tmp, ft_lstnew(str));
+	ft_lstadd_back(tmp, ft_lstnew(str, 0));
 	if (++*new)
 		*res += words_get(new, tmp);
 }
@@ -158,6 +157,7 @@ void	ft_sign_dollar(char **new, t_list **tmp, int *res)
 {
 	char	*str;
 	int		wordlen;
+
 	*res += 1;
 	*new += 1;
 	wordlen = 1;
@@ -167,7 +167,7 @@ void	ft_sign_dollar(char **new, t_list **tmp, int *res)
 		wordlen += 1;
 	}
 	str = ft_strndup(*new - wordlen, wordlen);
-	ft_lstadd_back(tmp, ft_lstnew(str));
+	ft_lstadd_back(tmp, ft_lstnew(str, 0));
 	if (++*new)
 		*res += words_get(new, tmp);
 }
@@ -175,13 +175,13 @@ void	ft_sign_dollar(char **new, t_list **tmp, int *res)
 void	ft_signs(char **new, t_list **tmp, int *res)
 {
 	if (**new == '<')
-		ft_lstadd_back(tmp, ft_lstnew("<"));
+		ft_lstadd_back(tmp, ft_lstnew("<", 1));
 	if (**new == '>')
-		ft_lstadd_back(tmp, ft_lstnew(">"));
+		ft_lstadd_back(tmp, ft_lstnew(">", 1));
 	if (**new == ';')
-		ft_lstadd_back(tmp, ft_lstnew(";"));
+		ft_lstadd_back(tmp, ft_lstnew(";", 1));
 	if (**new == '|')
-		ft_lstadd_back(tmp, ft_lstnew("|"));
+		ft_lstadd_back(tmp, ft_lstnew("|", 1));
 	*res += 1;
 	*new += 1;
 	if (**new)
@@ -224,13 +224,23 @@ char	**ft_parse(char *line)
 	if (!(full = malloc(sizeof(char **) * size + 1)))
 		return (NULL);
 	t_list *temp = tmp;
-	while(i < size && tmp)
+	while(i < size && tmp )
 	{
-		full[i] = ft_strdup(tmp->content);
+		if (tmp->argument == 1)
+		{
+			full[i] = NULL;
+			ft_exec(full);
+			full = full + i;
+			size -= i;
+			i = -1;
+		}
+		else
+			full[i] = ft_strdup(tmp->content);
 		tmp = tmp->next;
 		i++;
 	}
 	full[i] = NULL;
+	// ft_exec(full);
 	ft_list_clear(&temp);
 	return (full);
 }
