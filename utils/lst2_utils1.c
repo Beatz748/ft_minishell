@@ -1,30 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   lst2_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbeedril <tbeedril@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/20 14:07:37 by kshantel          #+#    #+#             */
-/*   Updated: 2020/11/04 20:49:57 by kshantel         ###   ########.fr       */
+/*   Created: 2020/11/25 14:55:25 by tbeedril          #+#    #+#             */
+/*   Updated: 2020/11/25 14:55:56 by tbeedril         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-char	*ft_strchr(const char *s, int c)
-{
-	size_t i;
-
-	i = 0;
-	while (i <= ft_strlen(s))
-	{
-		if (s[i] == c)
-			return ((char *)s + i);
-		i++;
-	}
-	return (NULL);
-}
+#include "utils.h"
 
 t_list2		*ft_lstnew_env(void *content, void *name)
 {
@@ -87,46 +73,4 @@ void		ft_lstadd_prev_back(t_list2 **lst, t_list2 *new)
 	last = ft_lst_prevlast(*lst);
 	new->next = last->next;
 	last->next = new;
-}
-
-int			ft_lstsize_env(t_list2 *lst)
-{
-	int		count;
-
-	count = 0;
-	while (lst)
-	{
-		count++;
-		lst = lst->next;
-	}
-	return (count);
-}
-
-
-t_list2	*ft_parse_env(char **env)
-{
-	t_list2	*my_env = NULL;
-	int i;
-	char *p;
-
-	i = 0;
-	p = NULL;
-	while (env[i])
-	{
-		p = ft_strchr(env[i], '=');
-		*p = '\0';
-		ft_lstadd_back_env(&my_env, ft_lstnew_env(++p, env[i]));
-	//	printf("%s\n", (char*)my_env->name);
-		i++;
-	}
-
-	return (my_env);
-}
-
-int		main(int ac, char **av, char **env)
-{
-	g_env = ft_parse_env(env);
-	write(1, "\033[0;31mpizza-shell ", 20);
-	write(1, "BY TBEEDRIL && KSHANTEL 🍕 \033[0m \n\n\n", 38);
-	ft_minishell();
 }

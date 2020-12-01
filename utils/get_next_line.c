@@ -3,37 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbeedril <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 00:00:22 by kshantel          #+#    #+#             */
-/*   Updated: 2020/11/05 19:14:09 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/01 18:06:30 by tbeedril         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "utils.h"
 
-char	*ft_strdup(const char *s)
+char	*ft_strchr(const char *s, int c)
 {
-	char	*str;
-	char	*str2;
-	int		i;
-	int		j;
+	size_t i;
 
 	i = 0;
-	j = 0;
-	str2 = (char *)s;
-	while (str2[i] != '\0')
-		i++;
-	str = (char*)malloc(sizeof(*str2) * (i + 1));
-	if (!str)
-		return (NULL);
-	while (j < i)
+	while (i <= ft_strlen(s))
 	{
-		str[j] = str2[j];
-		j++;
+		if (s[i] == c)
+			return ((char *)s + i);
+		i++;
 	}
-	str[j] = '\0';
-	return (str);
+	return (NULL);
 }
 
 size_t	ft_strlen(const char *s)
@@ -46,29 +36,6 @@ size_t	ft_strlen(const char *s)
 		len++;
 	}
 	return (len);
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	size_t	y;
-	size_t	i;
-	char	*str;
-
-	i = 0;
-	y = 0;
-	if (!s1 || !s2)
-		return (NULL);
-	if (!(str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1))))
-		return (NULL);
-	while (s1[i])
-	{
-		str[i] = s1[i];
-		i++;
-	}
-	while (s2[y])
-		str[i++] = s2[y++];
-	str[i] = '\0';
-	return (str);
 }
 
 int		get_next_line(int fd, char **line)
@@ -84,8 +51,12 @@ int		get_next_line(int fd, char **line)
 	if (!(*line = malloc(1)))
 		return (-1);
 	**line = 0;
+	if (fd < 0 || !line || read(fd, buf, 0) < 0)
+		return (0);
 	while ((sr = read(fd, buf, 1)) > 0)
 	{
+		if (sr == -1)
+			exit(0);
 		if (*buf != '\n')
 		{
 			tmp = *line;

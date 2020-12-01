@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_signals.c                                       :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbeedril <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/20 13:54:39 by kshantel          #+#    #+#             */
-/*   Updated: 2020/10/24 19:08:26 by kshantel         ###   ########.fr       */
+/*   Created: 2020/11/25 18:51:40 by tbeedril          #+#    #+#             */
+/*   Updated: 2020/12/01 16:20:18 by tbeedril         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../srcs/minishell.h"
 
-void	ft_signals(int sig)
+int		ft_exec_pwd(char **full)
 {
-	if (sig == SIGINT)
-	{
-		exit(-1);
-	}
+	(void)full;
+	write(1, getcwd(NULL, 0), ft_strlen(getcwd(NULL, 0)));
+	write(1, "\n", 1);
+	code = 0;
+	return (0);
 }

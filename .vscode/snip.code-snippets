@@ -1,0 +1,50 @@
+{
+	"For Debug": {
+	  "prefix": ["debug"],
+	  "body": ["		printf(\" \\033[41m  IT'S DEBUG !!! === %$1 \\033[0m \\n\", $0);"],
+	  "description": "A for Debug."
+	},
+	"For new str": {
+		"prefix": ["strnew"],
+		"body": ["		char *str = \"Hello, ///debug/// world\";"],
+		"description": "A for str."
+	  },
+	  "For new const": {
+		"prefix": ["constnew"],
+		"body": ["		const char str[] = \"Hello, ///debug/// world\";"],
+		"description": "A for str."
+	  },
+	  "For new malloc": {
+		"prefix": ["mallocnew"],
+		"body": [
+			"//START DEBUG",
+			"			char	*dstr;",
+			"			dstr = malloc(10);",
+			"			int iter = -1;",
+			"			while (i++ < 10);",
+			"				dstr[i] = i + '0';"
+			"			dstr[10] = 0;",
+			"//END DEBUG"
+		],
+		"description": "A for malloc."
+	  },
+	  "ft_strlen": {
+		"prefix": ["call strlen"],
+		"body": [
+			"",
+			"size_t	ft_strlen(const char *s)",
+			"{",
+			"	size_t len;",
+			"",
+			"	len = 0;",
+			"	while (s[len])"
+			"	{",
+			"		len++;",
+			"	}",
+			"	return (len);",
+			"}",
+			""
+		],
+		"description": "libft"
+	}
+}
