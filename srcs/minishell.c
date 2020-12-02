@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 20:49:18 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/01 21:15:31 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/02 21:24:02 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_nobuiltin(char **full)
 	if ((code = execve(my_path, full, en)) == -1)
 	{
 		ft_error(2, full);
-		_exit(42);
+		exit(code);
 	}
 	free(my_path);
 }
@@ -71,10 +71,10 @@ void	ft_exec(char **full, int pipe_in, int pipe_out)
 		ft_export(full);
 	else if (!(ft_strcmp(full[0], "exit")))
 		ft_exit(full);
-	else if ((pid = fork()) == 0)
+	else if ((code = (pid = fork())) == 0)
 	{
 		ft_some_dups(full, pipe_in, pipe_out);
-		exit(0);
+		exit(code);
 	}
 	else if (pid < 0)
 	{
@@ -98,7 +98,8 @@ void	ft_minishell(void)
 		write(1, getcwd(dir, MAX_DIR), ft_strlen(getcwd(dir, MAX_DIR)));
 		write(1, ">\033[0m ", 7);
 		if (get_next_line(0, &cmd) == 0)
-			exit(0);
+		// cmd = "ls ergferger";
+			exit(code);
 		init_signals(ft_child_signal);
 		ft_parse(cmd);
 		free(cmd);

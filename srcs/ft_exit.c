@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbeedril <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 18:52:10 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/01 16:18:48 by tbeedril         ###   ########.fr       */
+/*   Updated: 2020/12/02 18:30:16 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ int		ft_exit(char **full)
 	if (full[1])
 		i = ft_atoi(full[1]);
 	code = i;
-	exit(i);
+	exit(code);
 	return (i);
 }

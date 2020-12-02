@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 19:09:11 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/01 21:18:02 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/02 21:31:19 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	ft_exec2(char **full)
 	{
 		if ((ft_check_builtin(full)))
 			ft_nobuiltin(full);
-		exit(0);
+		exit(code);
 	}
 	else if (pid < 0)
 	{
@@ -68,6 +68,7 @@ void	ft_exec2(char **full)
 		return ;
 	}
 	waitpid(pid, &status, 0);
+	code = WEXITSTATUS(status);
 }
 
 void	ft_one_cmd(t_list *cmd, t_exec *exe)
@@ -90,7 +91,7 @@ void	ft_exe(t_list *cmd)
 	t_exec	*exe;
 
 	if (!(exe = malloc(sizeof(t_exec))))
-		exit(0);
+		exit(code);
 	ft_init(exe, cmd, &flag);
 	if (exe->y == 0)
 	{

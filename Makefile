@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tbeedril <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/27 14:49:47 by tbeedril          #+#    #+#              #
-#    Updated: 2020/12/01 18:54:36 by tbeedril         ###   ########.fr        #
+#    Updated: 2020/12/02 21:19:38 by kshantel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-CC = gcc
+CC = gcc -g
 INCS = -I./parser -I./utils -I./srcs
 CFLAGS = -Wall -Wextra -g $(INCS)
 

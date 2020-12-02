@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 14:34:50 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/01 20:29:53 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/02 21:15:48 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ void	ft_minishell2(char **full)
 	if ((code = execve(path, full, en)) == -1)
 	{
 		ft_error(2, full);
-		_exit(42);
+		exit(code);
 	}
 }
