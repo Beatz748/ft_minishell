@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 19:09:11 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/02 21:31:19 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/05 17:55:11 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,31 +89,41 @@ void	ft_exe(t_list *cmd)
 	int		flag;
 	int		file;
 	t_exec	*exe;
+	int		how;
 
 	if (!(exe = malloc(sizeof(t_exec))))
-		exit(code);
-	ft_init(exe, cmd, &flag);
-	if (exe->y == 0)
-	{
-		ft_one_cmd(cmd, exe);
-		free(exe);
-		return ;
-	}
+		exit(0);
+		how = 0;
+	// ft_init(exe, cmd, &flag);
+	// printf(" \033[41m  IT'S DEBUG !!! === %d \033[0m \n", flag);
+	// if (exe->y == 0)
+	// {
+	// 	ft_one_cmd(cmd, exe);
+	// 	return;
+	// }
 	while (cmd->argument != 999)
 	{
-		if (cmd->argument == 1 || cmd->argument == 5 ||
-		cmd->argument == 2 || cmd->argument == 3)
+		ft_init(exe, cmd, &flag);
+		while (ft_strcmp(cmd->content, ";"))
+		{
+			if (cmd->argument == 1 || cmd->argument == 5 ||
+			cmd->argument == 2 || cmd->argument == 3)
+				cmd = cmd->next;
+			ft_full_init(exe, &cmd);
+			if (exe->y < 2)
+				how = 1;
+			printf(" \033[41m  IT'S DEBUG !!! ===y %d \033[0m \n",how);
+			if (exe->y > 0 && (exe->y % 2 == 0))
+				ft_do1(exe, &cmd, &flag);
+			else if (exe->y > 0 && (exe->y % 2 == 1))
+				ft_do2(exe, &cmd, &flag, how);
+			else if (exe->y == 0 && flag == 1)
+				ft_do3(exe, &cmd, &file);
+			else if (exe->y == 0 && flag == 0)
+				ft_do4(exe, &cmd, &file, how);
+			ft_full_free(exe->full);
+		}
+		if (cmd->next)
 			cmd = cmd->next;
-		ft_full_init(exe, &cmd);
-		if (exe->y > 0 && (exe->y % 2 == 0))
-			ft_do1(exe, &cmd, &flag);
-		else if (exe->y > 0 && (exe->y % 2 == 1))
-			ft_do2(exe, &cmd, &flag);
-		else if (exe->y == 0 && flag == 1)
-			ft_do3(exe, &cmd, &file);
-		else if (exe->y == 0 && flag == 0)
-			ft_do4(exe, &cmd, &file);
-		ft_full_free(exe->full);
 	}
-	free(exe);
 }

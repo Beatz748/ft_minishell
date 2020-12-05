@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 23:58:13 by kshantel          #+#    #+#             */
-/*   Updated: 2020/12/01 21:10:02 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/05 17:54:31 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ int				ft_full_init(t_exec *exe, t_list **cmd);
 void			ft_exe(t_list *cmd);
 void			ft_signals(int sig);
 void			ft_do1(t_exec *exe, t_list **cmd, int *flag);
-void			ft_do2(t_exec *exe, t_list **cmd, int *flag);
+void			ft_do2(t_exec *exe, t_list **cmd, int *flag, int how);
 void			ft_do3(t_exec *exe, t_list **cmd, int *file);
-void			ft_do4(t_exec *exe, t_list **cmd, int *file);
+void			ft_do4(t_exec *exe, t_list **cmd, int *file, int how);
 int				ft_check_builtin(char **full);
 void			ft_nobuiltin(char **full);
 void			ft_exec(char **full, int pipe_in, int pipe_out);
