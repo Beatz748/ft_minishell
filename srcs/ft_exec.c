@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 19:09:11 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/05 17:55:11 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/05 20:39:26 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,15 +104,17 @@ void	ft_exe(t_list *cmd)
 	while (cmd->argument != 999)
 	{
 		ft_init(exe, cmd, &flag);
+			if (exe->y < 2)
+				how = 1;
 		while (ft_strcmp(cmd->content, ";"))
 		{
 			if (cmd->argument == 1 || cmd->argument == 5 ||
 			cmd->argument == 2 || cmd->argument == 3)
 				cmd = cmd->next;
 			ft_full_init(exe, &cmd);
-			if (exe->y < 2)
-				how = 1;
-			printf(" \033[41m  IT'S DEBUG !!! ===y %d \033[0m \n",how);
+			// if (exe->y < 2)
+				// how = 1;
+			printf(" \033[41m  IT'S DEBUG !!! ===y %d \033[0m \n",exe->y);
 			if (exe->y > 0 && (exe->y % 2 == 0))
 				ft_do1(exe, &cmd, &flag);
 			else if (exe->y > 0 && (exe->y % 2 == 1))

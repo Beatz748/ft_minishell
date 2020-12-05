@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 20:32:07 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/05 18:11:45 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/05 20:38:59 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	ft_do1(t_exec *exe, t_list **cmd, int *flag)
 	close((exe->pipefd2)[1]);
 	(exe->y)--;
 	*flag = 0;
+			printf(" \033[41m  IT'S DEBUG !!! === %s \033[0m \n", "END 1");
 }
 
 void	ft_do2(t_exec *exe, t_list **cmd, int *flag, int how)
@@ -65,6 +66,7 @@ void	ft_do2(t_exec *exe, t_list **cmd, int *flag, int how)
 	ft_exec(exe->full, (exe->pipefd)[0], (exe->pipefd2)[1]);
 	(exe->y)--;
 	*flag = 1;
+	printf(" \033[41m  IT'S DEBUG !!! === %s \033[0m \n", "END 2");
 }
 
 void	ft_do3(t_exec *exe, t_list **cmd, int *file)
@@ -86,6 +88,7 @@ void	ft_do3(t_exec *exe, t_list **cmd, int *file)
 	else
 		ft_exec((exe->full), (exe->pipefd2)[0], STDOUT_FILENO);
 	close((exe->pipefd2)[0]);
+	printf(" \033[41m  IT'S DEBUG !!! === %s \033[0m \n", "END 3");
 }
 
 void	ft_do4(t_exec *exe, t_list **cmd, int *file, int how)
@@ -110,4 +113,5 @@ void	ft_do4(t_exec *exe, t_list **cmd, int *file, int how)
 		ft_exec((exe->full), (exe->pipefd)[0], STDOUT_FILENO);
 	if ((exe->pipefd)[0] != STDIN_FILENO)
 		close((exe->pipefd)[0]);
+	printf(" \033[41m  IT'S DEBUG !!! === %s \033[0m \n", "END 4");
 }

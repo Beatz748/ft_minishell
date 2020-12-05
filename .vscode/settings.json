@@ -12,4 +12,6 @@
 	"files.autoSave": "afterDelay",
 	"workbench.iconTheme": "eq-material-theme-icons-light",
 	"workbench.colorTheme": "SynthWave '84",
+	"synthwave84.brightness": "0.45",
+	"synthwave84.disableGlow": true,
 }
