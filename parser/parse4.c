@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 17:41:10 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/06 01:41:56 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/07 02:41:43 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*ft_get_tiktok(char *str)
 		tmp = tmp->next;
 	if (tmp)
 		return (tmp->content);
-	return (NULL);
+	return ("");
 }
 
 char	*ft_get_gome(void)

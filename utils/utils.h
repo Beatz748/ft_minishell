@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 14:31:37 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/06 01:38:09 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/07 00:14:22 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 typedef struct		s_list
 {
-	void			*content;
+	char			*content;
 	int				argument;
 	int				merge;
 	struct s_list	*next;

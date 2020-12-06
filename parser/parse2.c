@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 17:32:30 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/06 01:41:41 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/07 02:46:35 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		words_get(char **s, t_list **tmp)
 	char	*new;
 
 	res = 0;
-	if (!(s) || !(*s) || !(**s) || !(new = *s))
+	if (!(s) || !(*s) || !(new = *s))
 		return (0);
 	if (*new && *new == '\'')
 		ft_new_1quo(&new, tmp, &res);
@@ -92,6 +92,37 @@ t_list	*ft_parse_2(t_list *cmd)
 	return (ret);
 }
 
+t_list *ft_merg(t_list *tmp)
+{
+	t_list *new;
+	t_list *safe;
+	t_list *del;
+
+	new = tmp;
+	safe = NULL;
+	ft_lstadd_back(&safe, ft_lstnew(new->content, new->argument, new->merge));
+	del = safe;
+	if (tmp->next)
+		tmp = tmp->next;
+	else
+		return (NULL);
+	while (tmp->argument != 999)
+	{
+		if (safe->merge == 1)
+		{
+			safe->content = ft_strjoin(safe->content, tmp->content);
+			safe->merge = new->merge;
+		}
+		else
+			ft_lstadd_back(&safe, ft_lstnew(ft_strdup(tmp->content), tmp->argument, tmp->merge));
+		tmp = tmp->next;
+		new = new->next;
+		if (safe->merge == 0)
+			safe = safe->next;
+	}
+	return (del);
+}
+
 void	ft_parse(char *line)
 {
 	t_list	*tmp;
@@ -101,14 +132,17 @@ void	ft_parse(char *line)
 	tmp = NULL;
 	size = words_get(&line, &tmp);
 	ft_lstadd_back(&tmp, ft_lstnew(";", 999, 0));
-	while (tmp->argument != 999)
-	{
-				printf(" \033[41m  IT'S DEBUG !!! === %s \033[0m \n", tmp->content);
-						printf(" \033[41m  IT'S DEBUG !!! === %d \033[0m \n", tmp->merge);
-						tmp = tmp->next;
-	}
-	// i = ft_tokens(tmp);
-	// tmp = ft_parse_2(tmp);
-	// ft_exe(tmp);
-	// ft_list_clear(&tmp);
+	// ft_lstadd_back(&tmp, ft_lstnew(";", 999, 0));
+	tmp = ft_merg(tmp);
+	ft_lstadd_back(&tmp, ft_lstnew(";", 999, 0));
+	// while (tmp->argument != 999)
+	// {
+	// 	printf(" \033[41m  IT'S DEBUG !!! === %s \033[0m \n", tmp->content);
+	// 	// printf(" \033[41m  IT'S DEBUG !!! === %d \033[0m \n", tmp->merge);
+	// 	tmp = tmp->next;
+	// }
+	i = ft_tokens(tmp);
+	tmp = ft_parse_2(tmp);
+	ft_exe(tmp);
+	ft_list_clear(&tmp);
 }
