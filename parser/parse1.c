@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 15:21:48 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/02 18:18:19 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/06 02:00:24 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ void	ft_new_1quo(char **new, t_list **tmp, int *res)
 {
 	char	*str;
 	int		wordlen;
+	int		merge;
 
 	wordlen = 0;
+	merge = 0;
 	*res += 1;
 	*new += 1;
 	while (**new && **new != '\'')
@@ -26,9 +28,9 @@ void	ft_new_1quo(char **new, t_list **tmp, int *res)
 		wordlen += 1;
 	}
 	str = ft_strndup(*new - wordlen, wordlen);
-	ft_lstadd_back(tmp, ft_lstnew(str, 0));
-	if (**new)
-		*new += 1;
+	if (++*new && **new != ' ' && **new != '\0')
+		merge = 1;
+	ft_lstadd_back(tmp, ft_lstnew(str, 0, merge));
 	if (*new)
 		*res += words_get(new, tmp);
 }
@@ -37,8 +39,10 @@ void	ft_new_word(char **new, t_list **tmp, int *res)
 {
 	char	*str;
 	int		wordlen;
+	int		merge;
 
 	*res += 1;
+	merge = 0;
 	wordlen = 0;
 	while (**new && **new != ' ' && **new != ';' && **new != '\''
 	&& **new != '\"' && **new != '$' && **new != '>'
@@ -48,7 +52,10 @@ void	ft_new_word(char **new, t_list **tmp, int *res)
 		wordlen++;
 	}
 	str = ft_strndup(*new - wordlen, wordlen);
-	ft_lstadd_back(tmp, ft_lstnew(str, 0));
+	if (*new && **new != ' ' && **new != '\0')
+		merge = 1;
+			printf(" \033[41m  IT'CESHKA!!! === %c \033[0m \n", **new);
+	ft_lstadd_back(tmp, ft_lstnew(str, 0, merge));
 	if (*new)
 		*res += words_get(new, tmp);
 }
@@ -58,8 +65,10 @@ void	ft_new_2quo(char **new, t_list **tmp, int *res)
 	char	*str;
 	int		wordlen;
 	char	*tmp_str;
+	int		merge;
 
 	*res += 1;
+	merge = 0;
 	*new += 1;
 	wordlen = 0;
 	while (**new && **new != '\"')
@@ -70,8 +79,10 @@ void	ft_new_2quo(char **new, t_list **tmp, int *res)
 	tmp_str = ft_strndup(*new - wordlen, wordlen);
 	str = ft_some_dol(tmp_str);
 	free(tmp_str);
-	ft_lstadd_back(tmp, ft_lstnew(str, 2));
-	if (++*new)
+	if (++*new && **new != ' ' && **new != '\0')
+		merge = 1;
+	ft_lstadd_back(tmp, ft_lstnew(str, 0, merge));
+	if (*new)
 		*res += words_get(new, tmp);
 }
 
@@ -90,9 +101,11 @@ void	ft_sign_dollar(char **new, t_list **tmp, int *res)
 	char	*str;
 	char	*fin;
 	int		wordlen;
+	int		merge;
 
 	*res += 1;
 	*new += 1;
+	merge = 0;
 	wordlen = 1;
 	while (*new && **new && **new != ' ' && **new != ';' && **new != '\''
 	&& **new != '\"' && **new != '$' && **new != '>'
@@ -107,7 +120,9 @@ void	ft_sign_dollar(char **new, t_list **tmp, int *res)
 	else
 		fin = ft_strdup(ft_get_tiktok(str + 1));
 	free(str);
-	ft_lstadd_back(tmp, ft_lstnew(fin, 1));
+	if (*new && **new != ' ' && **new != '\0')
+		merge = 1;
+	ft_lstadd_back(tmp, ft_lstnew(str, 0, merge));
 	if (**new)
 		*res += words_get((++new), tmp);
 }

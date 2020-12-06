@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 17:32:30 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/02 18:57:39 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/06 01:41:41 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	ft_signs(char **new, t_list **tmp, int *res)
 {
 	if (**new == '<')
-		ft_lstadd_back(tmp, ft_lstnew("<", 5));
+		ft_lstadd_back(tmp, ft_lstnew("<", 5, 0));
 	if (**new == '>')
-		ft_lstadd_back(tmp, ft_lstnew(">", 5));
+		ft_lstadd_back(tmp, ft_lstnew(">", 5, 0));
 	if (**new == ';')
-		ft_lstadd_back(tmp, ft_lstnew(";", 3));
+		ft_lstadd_back(tmp, ft_lstnew(";", 3, 0));
 	if (**new == '|')
-		ft_lstadd_back(tmp, ft_lstnew("|", 5));
+		ft_lstadd_back(tmp, ft_lstnew("|", 5, 0));
 	*res += 1;
 	*new += 1;
 	if (**new)
@@ -100,9 +100,15 @@ void	ft_parse(char *line)
 
 	tmp = NULL;
 	size = words_get(&line, &tmp);
-	ft_lstadd_back(&tmp, ft_lstnew(";", 999));
-	i = ft_tokens(tmp);
-	tmp = ft_parse_2(tmp);
-	ft_exe(tmp);
-	ft_list_clear(&tmp);
+	ft_lstadd_back(&tmp, ft_lstnew(";", 999, 0));
+	while (tmp->argument != 999)
+	{
+				printf(" \033[41m  IT'S DEBUG !!! === %s \033[0m \n", tmp->content);
+						printf(" \033[41m  IT'S DEBUG !!! === %d \033[0m \n", tmp->merge);
+						tmp = tmp->next;
+	}
+	// i = ft_tokens(tmp);
+	// tmp = ft_parse_2(tmp);
+	// ft_exe(tmp);
+	// ft_list_clear(&tmp);
 }

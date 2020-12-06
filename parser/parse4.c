@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbeedril <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 17:41:10 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/01 19:38:19 by tbeedril         ###   ########.fr       */
+/*   Updated: 2020/12/06 01:41:56 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,6 @@ t_list2	*ft_parse_env(char **env)
 		i++;
 	}
 	return (my_env);
-}
-
-void	ft_now(t_list *tmp)
-{
-	ft_lstadd_back(&tmp, ft_lstnew(";", 999));
 }
 
 char	*ft_get_tiktok(char *str)

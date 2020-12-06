@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbeedril <tbeedril@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 14:40:27 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/11/25 14:45:21 by tbeedril         ###   ########.fr       */
+/*   Updated: 2020/12/06 01:37:44 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void		ft_list_clear(t_list **begin_list)
 	}
 }
 
-t_list		*ft_lstnew(void *content, int flag)
+t_list		*ft_lstnew(void *content, int flag, int merge)
 {
 	t_list	*new;
 
@@ -39,6 +39,7 @@ t_list		*ft_lstnew(void *content, int flag)
 		return (NULL);
 	new->content = content;
 	new->argument = flag;
+	new->merge = merge;
 	new->next = NULL;
 	return (new);
 }

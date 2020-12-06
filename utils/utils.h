@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbeedril <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 14:31:37 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/01 16:48:31 by tbeedril         ###   ########.fr       */
+/*   Updated: 2020/12/06 01:38:09 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct		s_list
 {
 	void			*content;
 	int				argument;
+	int				merge;
 	struct s_list	*next;
 }					t_list;
 
@@ -47,12 +48,10 @@ void				ft_full_free(char **my_path);
 char				*ft_strdup(const char *s);
 char				*ft_strndup(const char *s, size_t n);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
-// static int			wordlen(char const *s, char c);
-// static int			words(char const *s, char c);
 char				**ft_split(char const *s, char c);
 int					get_next_line(int fd, char **line);
 void				ft_list_clear(t_list **begin_list);
-t_list				*ft_lstnew(void *content, int flag);
+t_list				*ft_lstnew(void *content, int flag, int merge);
 t_list				*ft_lstlast(t_list *lst);
 void				ft_lstadd_back(t_list **lst, t_list *new);
 int					ft_lstsize(t_list *lst);
