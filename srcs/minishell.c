@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 20:49:18 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/07 15:53:33 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/07 16:16:25 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_nobuiltin(char **full)
 		ft_minishell2(full);
 		return ;
 	}
-	if ((code = execve(my_path, full, en)) == -1)
+	if (execve(my_path, full, en) == -1)
 	{
 		ft_error(2, full);
 		exit(code);
@@ -82,6 +82,7 @@ void	ft_exec(char **full, int pipe_in, int pipe_out)
 		return ;
 	}
 	waitpid(pid, &status, 0);
+	code = WEXITSTATUS(status);
 }
 
 void	ft_minishell(void)
