@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 14:31:37 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/07 00:14:22 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/07 16:52:14 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ t_list				*ft_lstnew(void *content, int flag, int merge);
 t_list				*ft_lstlast(t_list *lst);
 void				ft_lstadd_back(t_list **lst, t_list *new);
 int					ft_lstsize(t_list *lst);
-t_list2				*ft_lstnew_env(void *content, void *name);
+t_list2				*ft_lenv(void *content, void *name);
 t_list2				*ft_lstlast_env(t_list2 *lst);
 void				ft_lstadd_back_env(t_list2 **lst, t_list2 *new);
 t_list2				*ft_lst_prevlast(t_list2 *lst);
-void				ft_lstadd_prev_back(t_list2 **lst, t_list2 *new);
+void				ft_ladd_prev(t_list2 **lst, t_list2 *new);
 int					ft_lstsize_env(t_list2 *lst);
 char				*ft_itoa(int n);
 

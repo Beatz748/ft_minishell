@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst2_utils.c                                       :+:      :+:    :+:   */
+/*   lst2_utils1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbeedril <tbeedril@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 14:55:25 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/11/25 14:55:56 by tbeedril         ###   ########.fr       */
+/*   Updated: 2020/12/07 16:52:14 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-t_list2		*ft_lstnew_env(void *content, void *name)
+t_list2		*ft_lenv(void *content, void *name)
 {
 	t_list2	*new;
 
@@ -59,7 +59,7 @@ t_list2		*ft_lst_prevlast(t_list2 *lst)
 	return (lst);
 }
 
-void		ft_lstadd_prev_back(t_list2 **lst, t_list2 *new)
+void		ft_ladd_prev(t_list2 **lst, t_list2 *new)
 {
 	t_list2	*last;
 

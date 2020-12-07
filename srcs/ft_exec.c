@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 19:09:11 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/06 01:25:22 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/07 17:50:00 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,4 +105,5 @@ void	ft_exe(t_list *cmd)
 		if (cmd->next)
 			cmd = cmd->next;
 	}
+	free(exe);
 }

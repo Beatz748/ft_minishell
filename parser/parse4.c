@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 17:41:10 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/07 02:41:43 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/07 16:51:29 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ t_list2	*ft_parse_env(char **env)
 	{
 		p = ft_strchr(env[i], '=');
 		*p = '\0';
-		ft_lstadd_back_env(&my_env, ft_lstnew_env(ft_strdup(++p), ft_strdup(env[i])));
+		ft_lstadd_back_env(&my_env,
+		ft_lenv(ft_strdup(++p), ft_strdup(env[i])));
 		i++;
 	}
 	return (my_env);

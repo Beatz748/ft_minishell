@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 17:32:30 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/07 15:53:48 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/07 18:18:16 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,13 +111,14 @@ t_list	*ft_parse_2(t_list *cmd)
 
 t_list *ft_merg(t_list *tmp)
 {
-	t_list *new;
-	t_list *safe;
-	t_list *del;
+	t_list	*new;
+	t_list	*safe;
+	t_list	*del;
+	char	*tmp2;
 
 	new = tmp;
 	safe = NULL;
-	ft_lstadd_back(&safe, ft_lstnew(new->content, new->argument, new->merge));
+	ft_lstadd_back(&safe, ft_lstnew(ft_strdup(new->content), new->argument, new->merge));
 	del = safe;
 	if (tmp->next)
 		tmp = tmp->next;
@@ -127,7 +128,9 @@ t_list *ft_merg(t_list *tmp)
 	{
 		if (safe->merge == 1)
 		{
+			tmp2 = safe->content;
 			safe->content = ft_strjoin(safe->content, tmp->content);
+			free(tmp2);
 			safe->merge = new->merge;
 		}
 		else
@@ -143,22 +146,28 @@ t_list *ft_merg(t_list *tmp)
 void	ft_parse(char *line)
 {
 	t_list	*tmp;
+	t_list	*new;
+	t_list	*safe;
 	int		size;
 	int		i;
 
 	tmp = NULL;
+	new = NULL;
 	size = words_get(&line, &tmp);
 	ft_lstadd_back(&tmp, ft_lstnew(";", 999, 0));
-	tmp = ft_merg(tmp);
-	ft_lstadd_back(&tmp, ft_lstnew(";", 999, 0));
-	// while (tmp->argument != 999)
-	// {
-	// 	printf(" \033[41m  IT'S DEBUG !!! === %s \033[0m \n", tmp->content);
-	// 	// printf(" \033[41m  IT'S DEBUG !!! === %d \033[0m \n", tmp->merge);
-	// 	tmp = tmp->next;
-	// }
-	i = ft_tokens(tmp);
-	tmp = ft_parse_2(tmp);
-	ft_exe(tmp);
+	// getchar();
+	new = ft_merg(tmp);
+	ft_lstadd_back(&new, ft_lstnew(";", 999, 0));
+	i = ft_tokens(new);
+
+	safe = ft_parse_2(new);
+	ft_exe(safe);
+	while (tmp->argument != 999)
+	{
+		free(tmp->content);
+		free(tmp);
+		tmp = tmp->next;
+	}
 	ft_list_clear(&tmp);
+	ft_list_clear(&new);
 }
