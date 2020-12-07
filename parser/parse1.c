@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 15:21:48 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/07 02:58:37 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/07 15:57:38 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,10 @@ void	ft_new_2quo(char **new, t_list **tmp, int *res)
 		wordlen += 1;
 	}
 	tmp_str = ft_strndup(*new - wordlen, wordlen);
-	str = ft_some_dol(tmp_str);
+	if (*tmp_str == '$' && wordlen == 1)
+		str = ft_strdup("$");
+	else
+		str = ft_some_dol(tmp_str);
 	free(tmp_str);
 	if (++*new && **new != ' ' && **new != '\0')
 		merge = 1;
@@ -108,7 +111,7 @@ void	ft_sign_dollar(char **new, t_list **tmp, int *res)
 	wordlen = 1;
 	while (*new && **new && **new != ' ' && **new != ';' && **new != '\''
 	&& **new != '\"' && **new != '$' && **new != '>'
-	&& **new != '<' && **new != '|')
+	&& **new != '<' && **new != '|' && **new != '\\')
 	{
 		*new += 1;
 		wordlen += 1;
@@ -116,6 +119,8 @@ void	ft_sign_dollar(char **new, t_list **tmp, int *res)
 	str = ft_strndup(*new - wordlen, wordlen);
 	if (str[1] == '?')
 		fin = ft_itoa(code);
+	else if (*str == '$' && wordlen == 1)
+		fin = ft_strdup("$");
 	else
 		fin = ft_strdup(ft_get_tiktok(str + 1));
 	free(str);
