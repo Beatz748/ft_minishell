@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 15:21:48 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/07 02:46:19 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/07 02:58:37 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_new_word(char **new, t_list **tmp, int *res)
 	wordlen = 0;
 	while (**new && **new != ' ' && **new != ';' && **new != '\''
 	&& **new != '\"' && **new != '$' && **new != '>'
-	&& **new != '<' && **new != '|')
+	&& **new != '<' && **new != '|' && **new != '\\')
 	{
 		(*new)++;
 		wordlen++;

@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 17:32:30 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/07 02:46:35 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/07 03:13:39 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,21 @@ void	ft_signs(char **new, t_list **tmp, int *res)
 		*res += words_get(new, tmp);
 }
 
+void ft_escape(char **new, t_list **tmp, int *res)
+{
+	char	*str;
+	int		merge;
+
+	*new += 1;
+	str = ft_strndup(*new, 1);
+	*new += 1;
+	if (*new && **new != ' ' && **new != '\0')
+		merge = 1;
+	ft_lstadd_back(tmp, ft_lstnew(str, 0, merge));
+	if (**new)
+		*res += words_get(new, tmp);
+}
+
 int		words_get(char **s, t_list **tmp)
 {
 	int		res;
@@ -41,7 +56,7 @@ int		words_get(char **s, t_list **tmp)
 	else if (*new && *new == '\"')
 		ft_new_2quo(&new, tmp, &res);
 	else if (*new && *new != ' ' && *new != ';' && *new != '$'
-	&& *new != '>' && *new != '<' && *new != '|')
+	&& *new != '>' && *new != '<' && *new != '|' && *new != '\\')
 		ft_new_word(&new, tmp, &res);
 	else if (* new && *new == ' ')
 		ft_do_space(&new, tmp, &res);
@@ -49,6 +64,8 @@ int		words_get(char **s, t_list **tmp)
 		ft_signs(&new, tmp, &res);
 	else if (*new && *new == '$')
 		ft_sign_dollar(&new, tmp, &res);
+	else if (*new && *new == '\\')
+		ft_escape(&new, tmp, &res);
 	return (res);
 }
 
@@ -132,7 +149,6 @@ void	ft_parse(char *line)
 	tmp = NULL;
 	size = words_get(&line, &tmp);
 	ft_lstadd_back(&tmp, ft_lstnew(";", 999, 0));
-	// ft_lstadd_back(&tmp, ft_lstnew(";", 999, 0));
 	tmp = ft_merg(tmp);
 	ft_lstadd_back(&tmp, ft_lstnew(";", 999, 0));
 	// while (tmp->argument != 999)
