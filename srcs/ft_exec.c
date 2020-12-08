@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 19:09:11 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/07 17:50:00 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/08 03:22:16 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,12 @@ void	ft_exe(t_list *cmd)
 
 	if (!(exe = malloc(sizeof(t_exec))))
 		exit(0);
-		how = 0;
+	how = 0;
 	while (cmd->argument != 999)
 	{
 		ft_init(exe, cmd, &flag);
-			if (exe->y < 2)
-				how = 1;
+	if (exe->y < 2)
+		how = 1;
 		while (ft_strcmp(cmd->content, ";"))
 		{
 			if (cmd->argument == 1 || cmd->argument == 5 ||
