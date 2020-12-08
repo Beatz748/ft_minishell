@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 20:32:07 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/05 20:51:22 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/08 03:12:45 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	ft_do1(t_exec *exe, t_list **cmd, int *flag)
 		exe->pipefd[0] = ft_new_redi(*cmd);
 		(exe->pipefd2)[1] = STDOUT_FILENO;
 	}
+	else if (!(ft_strcmp((*cmd)->content, ";")))
+		(exe->pipefd)[1] = STDOUT_FILENO;
 	ft_exec(exe->full, (exe->pipefd2)[0], (exe->pipefd)[1]);
 	close((exe->pipefd2)[1]);
 	(exe->y)--;
@@ -62,6 +64,8 @@ void	ft_do2(t_exec *exe, t_list **cmd, int *flag, int how)
 		exe->pipefd[0] = ft_new_redi(*cmd);
 		(exe->pipefd2)[1] = STDOUT_FILENO;
 	}
+	else if (!(ft_strcmp((*cmd)->content, ";")))
+		(exe->pipefd2)[1] = STDOUT_FILENO;
 	ft_exec(exe->full, (exe->pipefd)[0], (exe->pipefd2)[1]);
 	(exe->y)--;
 	*flag = 1;

@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 17:32:30 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/07 18:18:16 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/08 02:52:10 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ t_list *ft_merg(t_list *tmp)
 		return (NULL);
 	while (tmp->argument != 999)
 	{
-		if (safe->merge == 1)
+		if (safe->merge == 1 && tmp->argument != 3 && tmp->argument != 5)
 		{
 			tmp2 = safe->content;
 			safe->content = ft_strjoin(safe->content, tmp->content);
@@ -135,6 +135,8 @@ t_list *ft_merg(t_list *tmp)
 		}
 		else
 			ft_lstadd_back(&safe, ft_lstnew(ft_strdup(tmp->content), tmp->argument, tmp->merge));
+		if (tmp->argument == 5 || tmp->argument == 3)
+			safe->merge = 0;
 		tmp = tmp->next;
 		new = new->next;
 		if (safe->merge == 0)
@@ -162,12 +164,12 @@ void	ft_parse(char *line)
 
 	safe = ft_parse_2(new);
 	ft_exe(safe);
-	while (tmp->argument != 999)
-	{
-		free(tmp->content);
-		free(tmp);
-		tmp = tmp->next;
-	}
-	ft_list_clear(&tmp);
-	ft_list_clear(&new);
+	// while (tmp->argument != 999)
+	// {
+	// 	free(tmp->content);
+	// 	free(tmp);
+	// 	tmp = tmp->next;
+	// }
+	// ft_list_clear(&tmp);
+	// ft_list_clear(&new);
 }
