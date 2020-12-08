@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 23:58:13 by kshantel          #+#    #+#             */
-/*   Updated: 2020/12/08 06:37:59 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/08 16:31:54 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,11 @@ typedef struct	s_exec
 	char		**full;
 	int			pipefd[2];
 	int			pipefd2[2];
-	int			flag;
 	int			y;
 	int			size_mini;
+	int			how;
+	int			flag;
+	int			file;
 }				t_exec;
 char			**g_en;
 t_list2			*g_env;

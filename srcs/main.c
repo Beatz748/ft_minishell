@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 14:07:37 by kshantel          #+#    #+#             */
-/*   Updated: 2020/12/08 07:40:51 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/08 16:47:10 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,27 @@ char	**ft_make_env_copy(char **envp)
 		cpy[ind] = ft_strdup(envp[ind]);
 	cpy[ind] = NULL;
 	return (cpy);
+}
+
+void	ft_minishell(void)
+{
+	int		i;
+	char	*cmd;
+	char	dir[MAX_DIR];
+
+	i = 0;
+	while (1)
+	{
+		init_signals(ft_parent_signal);
+		write(1, "\033[0;36m Σ>―(〃°ω°〃)♡→ \033[0;35m", 43);
+		write(1, getcwd(dir, MAX_DIR), ft_strlen(getcwd(dir, MAX_DIR)));
+		write(1, ">\033[0m ", 7);
+		if (get_next_line(0, &cmd) == 0)
+			exit(g_code);
+		init_signals(ft_child_signal);
+		ft_parse(cmd);
+		free(cmd);
+	}
 }
 
 int		main(int ac, char **av, char **env)

@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 17:33:33 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/08 06:27:47 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/08 16:46:51 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,27 @@ char	*ft_some_dol(char *str)
 	}
 	free(hdl);
 	return (hdl->s);
+}
+
+void	ft_new_1quo(char **new, t_list **tmp, int *res)
+{
+	char	*str;
+	int		wordlen;
+	int		merge;
+
+	wordlen = 0;
+	merge = 0;
+	*res += 1;
+	*new += 1;
+	while (**new && **new != '\'')
+	{
+		*new += 1;
+		wordlen += 1;
+	}
+	str = ft_strndup(*new - wordlen, wordlen);
+	if (++*new && **new != ' ' && **new != '\0')
+		merge = 1;
+	ft_lab(tmp, ft_lstnew(str, 0, merge));
+	if (*new)
+		*res += words_get(new, tmp);
 }

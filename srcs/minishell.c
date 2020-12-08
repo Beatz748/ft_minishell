@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 20:49:18 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/08 06:41:59 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/08 16:47:06 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,25 +90,4 @@ void	ft_exec(char **full, int pipe_in, int pipe_out)
 		return ;
 	}
 	ft_exec4(&pid);
-}
-
-void	ft_minishell(void)
-{
-	int		i;
-	char	*cmd;
-	char	dir[MAX_DIR];
-
-	i = 0;
-	while (1)
-	{
-		init_signals(ft_parent_signal);
-		write(1, "\033[0;36m Σ>―(〃°ω°〃)♡→ \033[0;35m", 43);
-		write(1, getcwd(dir, MAX_DIR), ft_strlen(getcwd(dir, MAX_DIR)));
-		write(1, ">\033[0m ", 7);
-		if (get_next_line(0, &cmd) == 0)
-			exit(g_code);
-		init_signals(ft_child_signal);
-		ft_parse(cmd);
-		free(cmd);
-	}
 }

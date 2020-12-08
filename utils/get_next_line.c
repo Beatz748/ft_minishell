@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 00:00:22 by kshantel          #+#    #+#             */
-/*   Updated: 2020/12/02 18:30:43 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/08 16:44:25 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ int		get_next_line(int fd, char **line)
 		return (0);
 	while ((sr = read(fd, buf, 1)) > 0)
 	{
-		if (sr == -1)
-			exit(0);
 		if (*buf != '\n')
 		{
 			tmp = *line;

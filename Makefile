@@ -6,7 +6,7 @@
 #    By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/27 14:49:47 by tbeedril          #+#    #+#              #
-#    Updated: 2020/12/05 18:08:52 by kshantel         ###   ########.fr        #
+#    Updated: 2020/12/08 17:03:15 by kshantel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRCS = srcs/main.c\
 		./parser/parse2.c\
 		./parser/parse3.c\
 		./parser/parse4.c\
+		./parser/parse5.c\
 		./srcs/ft_cd.c\
 		./srcs/ft_echo.c\
 		./srcs/ft_env.c\
@@ -41,7 +42,7 @@ SRCS = srcs/main.c\
 		./utils/lst_utils.c\
 		./utils/lst2_utils1.c\
 		./utils/lst2_utils2.c\
-		./utils/util.c
+		./utils/util.c\
 
 OBJS = $(SRCS:.c=.o)
 

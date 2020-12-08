@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 19:09:11 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/08 07:34:52 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/08 16:45:03 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,36 +69,38 @@ void	ft_exec2(char **full)
 	ft_exec4(&pid);
 }
 
+void	ft_handler(t_exec *exe, t_list **cmd)
+{
+	ft_full_init(exe, cmd);
+	if (exe->y > 0 && (exe->y % 2 == 0))
+		ft_do1(exe, cmd, &exe->flag);
+	else if (exe->y > 0 && (exe->y % 2 == 1))
+		ft_do2(exe, cmd, &exe->flag, exe->how);
+	else if (exe->y == 0 && exe->flag == 1)
+		ft_do3(exe, cmd, &exe->file);
+	else if (exe->y == 0 && exe->flag == 0)
+		ft_do4(exe, cmd, &exe->file, exe->how);
+	ft_full_free(exe->full);
+}
+
 void	ft_exe(t_list *cmd)
 {
-	int		flag;
-	int		file;
 	t_exec	*exe;
-	int		how;
 
 	if (!(exe = malloc(sizeof(t_exec))))
 		exit(0);
-	how = 0;
+	exe->how = 0;
 	while (cmd->ag != 999)
 	{
-		ft_init(exe, cmd, &flag);
+		ft_init(exe, cmd, &exe->flag);
 		if (exe->y < 2)
-			how = 1;
+			exe->how = 1;
 		while (ft_strcmp(cmd->cntent, ";"))
 		{
 			if (cmd->ag == 1 || cmd->ag == 5 ||
 			cmd->ag == 2 || cmd->ag == 3)
 				cmd = cmd->next;
-			ft_full_init(exe, &cmd);
-			if (exe->y > 0 && (exe->y % 2 == 0))
-				ft_do1(exe, &cmd, &flag);
-			else if (exe->y > 0 && (exe->y % 2 == 1))
-				ft_do2(exe, &cmd, &flag, how);
-			else if (exe->y == 0 && flag == 1)
-				ft_do3(exe, &cmd, &file);
-			else if (exe->y == 0 && flag == 0)
-				ft_do4(exe, &cmd, &file, how);
-			ft_full_free(exe->full);
+			ft_handler(exe, &cmd);
 		}
 		if (cmd->next)
 			cmd = cmd->next;
