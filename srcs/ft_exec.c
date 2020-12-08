@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 19:09:11 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/08 03:22:16 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/08 03:37:16 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		ft_full_init(t_exec *exe, t_list **cmd)
 		return (1);
 	while (i < exe->size_mini)
 	{
-		auf[i] = (*cmd)->content;
+		auf[i] = ft_strdup((*cmd)->content);
 		*cmd = (*cmd)->next;
 		i++;
 	}

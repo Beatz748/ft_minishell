@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 20:49:18 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/08 03:02:45 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/08 05:57:34 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	ft_minishell(void)
 		write(1, getcwd(dir, MAX_DIR), ft_strlen(getcwd(dir, MAX_DIR)));
 		write(1, ">\033[0m ", 7);
 		if (get_next_line(0, &cmd) == 0)
-		// cmd = "ls;ls>lol";
+		// cmd = "echo \"1\"2 \\$PATH";
 			exit(code);
 		init_signals(ft_child_signal);
 		ft_parse(cmd);

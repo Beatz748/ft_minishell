@@ -6,25 +6,34 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 14:34:50 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/02 21:15:48 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/08 03:56:05 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		ft_new_fd(t_list *cmd)
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
+{
+	if (!lst)
+		return ;
+	if (del)
+		del(lst->content);
+	free(lst);
+}
+
+int		ft_new_fd(t_list **cmd)
 {
 	int		fd;
 	int		flag;
 
 	flag = 0;
-	if (!(ft_strcmp(cmd->content, ">>")))
+	if (!(ft_strcmp((*cmd)->content, ">>")))
 		flag = 1;
-	*cmd = *cmd->next;
+	(*cmd) = (*cmd)->next;
 	if (flag == 0)
-		fd = open(cmd->content, O_CREAT | O_WRONLY | O_TRUNC, 0777);
+		fd = open((*cmd)->content, O_CREAT | O_WRONLY | O_TRUNC, 0777);
 	else
-		fd = open(cmd->content, O_RDWR | O_APPEND, 0777);
+		fd = open((*cmd)->content, O_RDWR | O_APPEND, 0777);
 	return (fd);
 }
 

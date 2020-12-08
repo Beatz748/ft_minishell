@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 23:58:13 by kshantel          #+#    #+#             */
-/*   Updated: 2020/12/05 17:54:31 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/08 03:56:13 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int				ft_check_builtin(char **full);
 void			ft_nobuiltin(char **full);
 void			ft_exec(char **full, int pipe_in, int pipe_out);
 void			ft_minishell(void);
-int				ft_new_fd(t_list *cmd);
+int				ft_new_fd(t_list **cmd);
 void			ft_minishell2(char **full);
 void	ft_child_signal(int sig);
 void	ft_parent_signal(int sig);
