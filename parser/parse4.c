@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 17:41:10 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/07 16:51:29 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/08 07:34:52 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*ft_get_tiktok(char *str)
 	while (tmp && (ft_strcmp(tmp->name, str)))
 		tmp = tmp->next;
 	if (tmp)
-		return (tmp->content);
+		return (tmp->cntent);
 	return ("");
 }
 
@@ -54,6 +54,6 @@ char	*ft_get_gome(void)
 	while (tmp && (ft_strcmp(tmp->name, "HOME")))
 		tmp = tmp->next;
 	if (tmp)
-		home = tmp->content;
+		home = tmp->cntent;
 	return (home);
 }

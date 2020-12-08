@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 19:09:11 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/08 06:40:12 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/08 07:34:52 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		ft_full_init(t_exec *exe, t_list **cmd)
 		return (1);
 	while (i < exe->size_mini)
 	{
-		auf[i] = ft_strdup((*cmd)->content);
+		auf[i] = ft_strdup((*cmd)->cntent);
 		*cmd = (*cmd)->next;
 		i++;
 	}
@@ -45,7 +45,6 @@ void	ft_exec2(char **full)
 	pid_t	pid;
 	int		status;
 
-	pid = 0;
 	if (full[0] == NULL)
 		return ;
 	else if (!(ft_strcmp(full[0], "cd")))
@@ -80,15 +79,15 @@ void	ft_exe(t_list *cmd)
 	if (!(exe = malloc(sizeof(t_exec))))
 		exit(0);
 	how = 0;
-	while (cmd->argument != 999)
+	while (cmd->ag != 999)
 	{
 		ft_init(exe, cmd, &flag);
-	if (exe->y < 2)
-		how = 1;
-		while (ft_strcmp(cmd->content, ";"))
+		if (exe->y < 2)
+			how = 1;
+		while (ft_strcmp(cmd->cntent, ";"))
 		{
-			if (cmd->argument == 1 || cmd->argument == 5 ||
-			cmd->argument == 2 || cmd->argument == 3)
+			if (cmd->ag == 1 || cmd->ag == 5 ||
+			cmd->ag == 2 || cmd->ag == 3)
 				cmd = cmd->next;
 			ft_full_init(exe, &cmd);
 			if (exe->y > 0 && (exe->y % 2 == 0))

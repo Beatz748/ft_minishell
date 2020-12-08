@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 14:07:37 by kshantel          #+#    #+#             */
-/*   Updated: 2020/12/08 06:32:43 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/08 07:40:51 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ int		main(int ac, char **av, char **env)
 {
 	(void)ac;
 	(void)av;
-
-
 	g_code = 0;
 	g_en = ft_make_env_copy(env);
 	g_env = ft_parse_env(env);

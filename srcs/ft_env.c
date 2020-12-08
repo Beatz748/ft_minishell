@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 18:45:55 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/08 06:31:09 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/08 07:34:52 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		ft_printf_env(void)
 	while (tmp)
 	{
 		if (ft_strcmp(tmp->name, "?"))
-			printf("%s=%s\n", tmp->name, tmp->content);
+			printf("%s=%s\n", tmp->name, tmp->cntent);
 		tmp = tmp->next;
 	}
 	g_code = 0;
@@ -46,7 +46,7 @@ char	**ft_path(void)
 	while (tm->next && ((ft_strcmp(tm->name, "PATH"))))
 		tm = tm->next;
 	if (!(ft_strcmp(tm->name, "PATH")))
-		return (my_pat = ft_split(tm->content, ':'));
+		return (my_pat = ft_split(tm->cntent, ':'));
 	return (NULL);
 }
 

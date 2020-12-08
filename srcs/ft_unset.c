@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 18:45:01 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/08 06:31:51 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/08 07:34:52 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_free_unset(t_list2 *srch)
 {
 	free(srch->name);
-	free(srch->content);
+	free(srch->cntent);
 	free(srch);
 }
 

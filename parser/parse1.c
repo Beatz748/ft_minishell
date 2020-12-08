@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 15:21:48 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/08 06:34:48 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/08 07:31:22 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_new_1quo(char **new, t_list **tmp, int *res)
 	str = ft_strndup(*new - wordlen, wordlen);
 	if (++*new && **new != ' ' && **new != '\0')
 		merge = 1;
-	ft_lstadd_back(tmp, ft_lstnew(str, 0, merge));
+	ft_lab(tmp, ft_lstnew(str, 0, merge));
 	if (*new)
 		*res += words_get(new, tmp);
 }
@@ -54,7 +54,7 @@ void	ft_new_word(char **new, t_list **tmp, int *res)
 	str = ft_strndup(*new - wordlen, wordlen);
 	if (*new && **new != ' ' && **new != '\0')
 		merge = 1;
-	ft_lstadd_back(tmp, ft_lstnew(str, 0, merge));
+	ft_lab(tmp, ft_lstnew(str, 0, merge));
 	if (*new)
 		*res += words_get(new, tmp);
 }
@@ -83,7 +83,7 @@ void	ft_new_2quo(char **new, t_list **tmp, int *res)
 	free(tmp_str);
 	if (++*new && **new != ' ' && **new != '\0')
 		merge = 1;
-	ft_lstadd_back(tmp, ft_lstnew(str, 0, merge));
+	ft_lab(tmp, ft_lstnew(str, 0, merge));
 	if (*new)
 		*res += words_get(new, tmp);
 }
@@ -129,7 +129,7 @@ void	ft_sign_dollar(char **new, t_list **tmp, int *res)
 	free(str);
 	if (*new && **new != ' ' && **new != '\0')
 		merge = 1;
-	ft_lstadd_back(tmp, ft_lstnew(fin, 0, merge));
+	ft_lab(tmp, ft_lstnew(fin, 0, merge));
 	if (**new)
 		*res += words_get((new), tmp);
 }

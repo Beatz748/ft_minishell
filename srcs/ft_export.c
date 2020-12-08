@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 18:40:01 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/08 06:03:53 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/08 07:34:52 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		ft_export(char **full)
 		if (!tmp)
 			ft_ladd_prev(&g_env, ft_lenv(ft_strdup(p_e), ft_strdup(full[i])));
 		else
-			tmp->content = ft_strdup(p_e);
+			tmp->cntent = ft_strdup(p_e);
 		i++;
 	}
 	return (g_code = 0);

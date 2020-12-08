@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 14:40:27 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/06 01:37:44 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/08 07:34:52 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ t_list		*ft_lstnew(void *content, int flag, int merge)
 	new = (t_list *)malloc(sizeof(t_list));
 	if (new == NULL)
 		return (NULL);
-	new->content = content;
-	new->argument = flag;
-	new->merge = merge;
+	new->cntent = content;
+	new->ag = flag;
+	new->mrg = merge;
 	new->next = NULL;
 	return (new);
 }
@@ -53,7 +53,7 @@ t_list		*ft_lstlast(t_list *lst)
 	return (lst);
 }
 
-void		ft_lstadd_back(t_list **lst, t_list *new)
+void		ft_lab(t_list **lst, t_list *new)
 {
 	t_list	*last;
 

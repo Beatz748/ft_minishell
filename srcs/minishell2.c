@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 14:34:50 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/08 06:38:20 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/08 07:34:52 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *))
 	if (!lst)
 		return ;
 	if (del)
-		del(lst->content);
+		del(lst->cntent);
 	free(lst);
 }
 
@@ -27,13 +27,13 @@ int		ft_new_fd(t_list **cmd)
 	int		flag;
 
 	flag = 0;
-	if (!(ft_strcmp((*cmd)->content, ">>")))
+	if (!(ft_strcmp((*cmd)->cntent, ">>")))
 		flag = 1;
 	(*cmd) = (*cmd)->next;
 	if (flag == 0)
-		fd = open((*cmd)->content, O_CREAT | O_WRONLY | O_TRUNC, 0777);
+		fd = open((*cmd)->cntent, O_CREAT | O_WRONLY | O_TRUNC, 0777);
 	else
-		fd = open((*cmd)->content, O_RDWR | O_APPEND, 0777);
+		fd = open((*cmd)->cntent, O_RDWR | O_APPEND, 0777);
 	return (fd);
 }
 

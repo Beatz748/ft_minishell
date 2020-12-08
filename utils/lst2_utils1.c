@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 14:55:25 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/07 16:52:14 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/08 07:34:52 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_list2		*ft_lenv(void *content, void *name)
 	new = (t_list2 *)malloc(sizeof(t_list2));
 	if (new == NULL)
 		return (NULL);
-	new->content = content;
+	new->cntent = content;
 	new->name = name;
 	new->next = NULL;
 	return (new);

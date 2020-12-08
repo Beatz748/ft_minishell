@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 14:31:37 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/07 16:52:14 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/08 07:35:16 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@
 
 typedef struct		s_list
 {
-	char			*content;
-	int				argument;
-	int				merge;
+	char			*cntent;
+	int				ag;
+	int				mrg;
 	struct s_list	*next;
 }					t_list;
 
 typedef struct		s_list2
 {
-	void			*content;
+	void			*cntent;
 	void			*name;
 	struct s_list2	*next;
 }					t_list2;
@@ -51,11 +51,11 @@ char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				**ft_split(char const *s, char c);
 int					get_next_line(int fd, char **line);
 void				ft_list_clear(t_list **begin_list);
-t_list				*ft_lstnew(void *content, int flag, int merge);
+t_list				*ft_lstnew(void *cntent, int flag, int merge);
 t_list				*ft_lstlast(t_list *lst);
-void				ft_lstadd_back(t_list **lst, t_list *new);
+void				ft_lab(t_list **lst, t_list *new);
 int					ft_lstsize(t_list *lst);
-t_list2				*ft_lenv(void *content, void *name);
+t_list2				*ft_lenv(void *cntent, void *name);
 t_list2				*ft_lstlast_env(t_list2 *lst);
 void				ft_lstadd_back_env(t_list2 **lst, t_list2 *new);
 t_list2				*ft_lst_prevlast(t_list2 *lst);

@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 17:32:30 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/08 07:18:15 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/08 07:41:11 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	ft_signs(char **new, t_list **tmp, int *res)
 {
 	if (**new == '<')
-		ft_lstadd_back(tmp, ft_lstnew("<", 5, 0));
+		ft_lab(tmp, ft_lstnew("<", 5, 0));
 	if (**new == '>')
-		ft_lstadd_back(tmp, ft_lstnew(">", 5, 0));
+		ft_lab(tmp, ft_lstnew(">", 5, 0));
 	if (**new == ';')
-		ft_lstadd_back(tmp, ft_lstnew(";", 3, 0));
+		ft_lab(tmp, ft_lstnew(";", 3, 0));
 	if (**new == '|')
-		ft_lstadd_back(tmp, ft_lstnew("|", 5, 0));
+		ft_lab(tmp, ft_lstnew("|", 5, 0));
 	*res += 1;
 	*new += 1;
 	if (**new)
@@ -38,7 +38,7 @@ void	ft_escape(char **new, t_list **tmp, int *res)
 	*new += 1;
 	if (*new && **new != ' ' && **new != '\0')
 		merge = 1;
-	ft_lstadd_back(tmp, ft_lstnew(str, 0, merge));
+	ft_lab(tmp, ft_lstnew(str, 0, merge));
 	if (**new)
 		*res += words_get(new, tmp);
 }
@@ -58,7 +58,7 @@ int		words_get(char **s, t_list **tmp)
 	else if (*new && *new != ' ' && *new != ';' && *new != '$'
 	&& *new != '>' && *new != '<' && *new != '|' && *new != '\\')
 		ft_new_word(&new, tmp, &res);
-	else if (* new && *new == ' ')
+	else if (*new && *new == ' ')
 		ft_do_space(&new, tmp, &res);
 	else if (*new == ';' || *new == '<' || *new == '>' || *new == '|')
 		ft_signs(&new, tmp, &res);
@@ -76,7 +76,7 @@ int		ft_tokens(t_list *cmd)
 	tok = 1;
 	while (cmd)
 	{
-		if (cmd->argument == 1)
+		if (cmd->ag == 1)
 			tok++;
 		cmd = cmd->next;
 	}
@@ -88,13 +88,13 @@ t_list	*ft_parse_2(t_list *cmd)
 	t_list	*tmp;
 	t_list	*ret;
 
-	tmp = (cmd->argument != 999) ? cmd->next : cmd;
+	tmp = (cmd->ag != 999) ? cmd->next : cmd;
 	ret = cmd;
-	while (tmp->argument != 999)
+	while (tmp->ag != 999)
 	{
-		if (cmd->argument == 5 && !ft_strcmp(tmp->content, ">"))
+		if (cmd->ag == 5 && !ft_strcmp(tmp->cntent, ">"))
 		{
-			cmd->content = ft_strjoin(cmd->content, tmp->content);
+			cmd->cntent = ft_strjoin(cmd->cntent, tmp->cntent);
 			cmd->next = tmp->next;
 			tmp = tmp->next;
 		}
@@ -113,10 +113,10 @@ void	ft_handl1_merg(t_list *safe, t_list *tmp)
 {
 	char	*tmp2;
 
-	tmp2 = safe->content;
-	safe->content = ft_strjoin(safe->content, tmp->content);
+	tmp2 = safe->cntent;
+	safe->cntent = ft_strjoin(safe->cntent, tmp->cntent);
 	free(tmp2);
-	safe->merge = tmp->merge;
+	safe->mrg = tmp->mrg;
 }
 
 t_list	*ft_merg(t_list *tmp)
@@ -127,25 +127,43 @@ t_list	*ft_merg(t_list *tmp)
 
 	new = tmp;
 	safe = NULL;
-	ft_lstadd_back(&safe, ft_lstnew(ft_strdup(new->content), new->argument, new->merge));
+	ft_lab(&safe, ft_lstnew(ft_strdup(new->cntent), new->ag, new->mrg));
 	del = safe;
 	if (tmp->next)
 		tmp = tmp->next;
-	while (tmp->argument != 999)
+	while (tmp->ag != 999)
 	{
-		if (safe->merge == 1 && tmp->argument != 3 && tmp->argument != 5 && new->merge)
+		if (safe->mrg == 1 && tmp->ag != 3 && tmp->ag != 5 && new->mrg)
 			ft_handl1_merg(safe, tmp);
 		else
 		{
-			ft_lstadd_back(&safe, ft_lstnew(ft_strdup(tmp->content), tmp->argument, tmp->merge));
+			ft_lab(&safe, ft_lstnew(ft_strdup(tmp->cntent), tmp->ag, tmp->mrg));
 			safe = safe->next;
 		}
-		if (tmp->argument == 5 || tmp->argument == 3)
-			safe->merge = 0;
+		if (tmp->ag == 5 || tmp->ag == 3)
+			safe->mrg = 0;
 		tmp = tmp->next;
 		new = new->next;
 	}
 	return (del);
+}
+
+void	ft_clear_lists(t_list *safe, t_list *tmp, t_list *new)
+{
+	while (safe->ag != 999)
+	{
+		free(safe->cntent);
+		safe = safe->next;
+	}
+	while (tmp->ag != 999)
+	{
+		if (tmp->ag != 3 && tmp->ag != 5)
+			free(tmp->cntent);
+		free(tmp);
+		tmp = tmp->next;
+	}
+	ft_list_clear(&tmp);
+	ft_list_clear(&new);
 }
 
 void	ft_parse(char *line)
@@ -159,25 +177,11 @@ void	ft_parse(char *line)
 	tmp = NULL;
 	new = NULL;
 	size = words_get(&line, &tmp);
-	ft_lstadd_back(&tmp, ft_lstnew(";", 999, 0));
+	ft_lab(&tmp, ft_lstnew(";", 999, 0));
 	new = ft_merg(tmp);
-	ft_lstadd_back(&new, ft_lstnew(";", 999, 0));
+	ft_lab(&new, ft_lstnew(";", 999, 0));
 	i = ft_tokens(new);
-
 	safe = ft_parse_2(new);
 	ft_exe(safe);
-	while (safe->argument != 999)
-	{
-		free(safe->content);
-		safe = safe->next;
-	}
-	while (tmp->argument != 999)
-	{
-		if (tmp->argument != 3 && tmp->argument != 5)
-			free(tmp->content);
-		free(tmp);
-		tmp = tmp->next;
-	}
-	ft_list_clear(&tmp);
-	ft_list_clear(&new);
+	ft_clear_lists(safe, tmp, new);
 }

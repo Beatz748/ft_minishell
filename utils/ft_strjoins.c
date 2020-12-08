@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoins.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbeedril <tbeedril@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 14:31:18 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/11/25 18:51:07 by tbeedril         ###   ########.fr       */
+/*   Updated: 2020/12/08 07:34:52 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ int		ft_len(t_list *cmd)
 	int		i;
 
 	i = 0;
-	while (cmd->argument == 0 ||
-	cmd->argument == 2 || cmd->argument == 1)
+	while (cmd->ag == 0 ||
+	cmd->ag == 2 || cmd->ag == 1)
 	{
 		i++;
 		cmd = cmd->next;
@@ -85,8 +85,8 @@ int		ft_list_pipes(t_list *cmd)
 	i = 0;
 	while (cmd)
 	{
-		if (cmd->argument == 5 &&
-		(ft_strcmp(cmd->content, ";")))
+		if (cmd->ag == 5 &&
+		(ft_strcmp(cmd->cntent, ";")))
 			i++;
 		cmd = cmd->next;
 	}
