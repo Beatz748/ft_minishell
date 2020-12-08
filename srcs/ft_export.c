@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 18:40:01 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/07 16:52:14 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/08 06:03:53 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,5 @@ int		ft_export(char **full)
 			tmp->content = ft_strdup(p_e);
 		i++;
 	}
-	return (code = 0);
+	return (g_code = 0);
 }

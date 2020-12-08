@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 17:32:30 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/08 05:57:09 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/08 07:18:15 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_signs(char **new, t_list **tmp, int *res)
 		*res += words_get(new, tmp);
 }
 
-void ft_escape(char **new, t_list **tmp, int *res)
+void	ft_escape(char **new, t_list **tmp, int *res)
 {
 	char	*str;
 	int		merge;
@@ -109,12 +109,21 @@ t_list	*ft_parse_2(t_list *cmd)
 	return (ret);
 }
 
-t_list *ft_merg(t_list *tmp)
+void	ft_handl1_merg(t_list *safe, t_list *tmp)
+{
+	char	*tmp2;
+
+	tmp2 = safe->content;
+	safe->content = ft_strjoin(safe->content, tmp->content);
+	free(tmp2);
+	safe->merge = tmp->merge;
+}
+
+t_list	*ft_merg(t_list *tmp)
 {
 	t_list	*new;
 	t_list	*safe;
 	t_list	*del;
-	char	*tmp2;
 
 	new = tmp;
 	safe = NULL;
@@ -122,17 +131,10 @@ t_list *ft_merg(t_list *tmp)
 	del = safe;
 	if (tmp->next)
 		tmp = tmp->next;
-	else
-		return (NULL);
 	while (tmp->argument != 999)
 	{
 		if (safe->merge == 1 && tmp->argument != 3 && tmp->argument != 5 && new->merge)
-		{
-			tmp2 = safe->content;
-			safe->content = ft_strjoin(safe->content, tmp->content);
-			free(tmp2);
-			safe->merge = tmp->merge;
-		}
+			ft_handl1_merg(safe, tmp);
 		else
 		{
 			ft_lstadd_back(&safe, ft_lstnew(ft_strdup(tmp->content), tmp->argument, tmp->merge));
@@ -142,8 +144,6 @@ t_list *ft_merg(t_list *tmp)
 			safe->merge = 0;
 		tmp = tmp->next;
 		new = new->next;
-		// if (safe->merge == 0)
-		// 	safe = safe->next;
 	}
 	return (del);
 }

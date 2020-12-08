@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 19:09:11 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/08 03:37:16 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/08 06:40:12 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,14 @@ void	ft_exec2(char **full)
 	{
 		if ((ft_check_builtin(full)))
 			ft_nobuiltin(full);
-		exit(code);
+		exit(g_code);
 	}
 	else if (pid < 0)
 	{
 		printf("Unable to fork\n");
 		return ;
 	}
-	waitpid(pid, &status, 0);
-	code = WEXITSTATUS(status);
+	ft_exec4(&pid);
 }
 
 void	ft_exe(t_list *cmd)

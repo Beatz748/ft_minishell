@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 23:58:13 by kshantel          #+#    #+#             */
-/*   Updated: 2020/12/08 03:56:13 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/08 06:37:59 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,16 @@ typedef struct	s_exec
 	int			y;
 	int			size_mini;
 }				t_exec;
-char **en;
-t_list2	*g_env;
-int		code;
+char			**g_en;
+t_list2			*g_env;
+int				g_code;
 
 int				ft_do_cd(char **full);
 int				ft_exec_cd(char **full);
 int				ft_exec_pwd(char **full);
 int				ft_echo(char **full);
 int				ft_printf_env(void);
+void			ft_exec4(pid_t *pid);
 char			**ft_path(void);
 char			*ft_true_path(char **full);
 int				ft_exit(char **full);
@@ -65,8 +66,8 @@ void			ft_exec(char **full, int pipe_in, int pipe_out);
 void			ft_minishell(void);
 int				ft_new_fd(t_list **cmd);
 void			ft_minishell2(char **full);
-void	ft_child_signal(int sig);
-void	ft_parent_signal(int sig);
-void	init_signals(void (*func)(int));
+void			ft_child_signal(int sig);
+void			ft_parent_signal(int sig);
+void			init_signals(void (*func)(int));
 
 #endif

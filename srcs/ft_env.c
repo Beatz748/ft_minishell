@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbeedril <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 18:45:55 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/01 16:25:39 by tbeedril         ###   ########.fr       */
+/*   Updated: 2020/12/08 06:31:09 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,18 @@ int		ft_printf_env(void)
 			printf("%s=%s\n", tmp->name, tmp->content);
 		tmp = tmp->next;
 	}
-	code = 0;
+	g_code = 0;
 	return (0);
+}
+
+void	ft_clean_path(char **full_path, char *full, char *path)
+{
+	char	*tmp;
+
+	*full_path = ft_strjoin(path, "/");
+	tmp = *full_path;
+	*full_path = ft_strjoin(*full_path, full);
+	free(tmp);
 }
 
 char	**ft_path(void)
@@ -56,10 +66,7 @@ char	*ft_true_path(char **full)
 	{
 		if (full_path)
 			free(full_path);
-		full_path = ft_strjoin(*my_path++, "/");
-		tmp = full_path;
-		full_path = ft_strjoin(full_path, full[0]);
-		free(tmp);
+		ft_clean_path(&full_path, full[0], *my_path++);
 		if (!stat(full_path, &buf) && (buf.st_mode & S_IFMT) == S_IFREG)
 		{
 			ft_full_free(split);

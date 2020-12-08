@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 13:54:39 by kshantel          #+#    #+#             */
-/*   Updated: 2020/12/07 16:06:20 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/08 06:03:53 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_child_signal(int sig)
 		ft_putstr_fd("\n", STDOUT_FILENO);
 	if (sig == SIGQUIT)
 	{
-		code = kill(SIGTERM, 0);
+		g_code = kill(SIGTERM, 0);
 	}
 }
 

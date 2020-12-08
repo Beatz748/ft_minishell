@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 18:48:00 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/02 18:54:51 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/08 06:03:53 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		ft_do_cd(char **full)
 {
-	code = chdir(full[1]);
+	g_code = chdir(full[1]);
 	return (0);
 }
 
@@ -25,12 +25,12 @@ int		ft_exec_cd(char **full)
 	getcwd(dir, MAX_DIR);
 	if (!(full[1]))
 	{
-		code = chdir(ft_get_gome());
+		g_code = chdir(ft_get_gome());
 		return (0);
 	}
 	else if (ft_strlen2(full) > 2)
 		printf("cd: too many arguments\n");
-	else if ((code = chdir(full[1])) == -1)
+	else if ((g_code = chdir(full[1])) == -1)
 		printf("cd: no such file or directory: %s\n", full[1]);
 	return (0);
 }

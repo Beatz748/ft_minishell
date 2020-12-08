@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 18:52:10 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/02 18:30:16 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/08 06:03:53 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		ft_exit(char **full)
 	i = 0;
 	if (full[1])
 		i = ft_atoi(full[1]);
-	code = i;
-	exit(code);
+	g_code = i;
+	exit(g_code);
 	return (i);
 }

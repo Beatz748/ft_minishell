@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 14:34:50 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/08 03:56:05 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/08 06:38:20 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void	ft_minishell2(char **full)
 	char	*path;
 
 	path = full[0];
-	if ((code = execve(path, full, en)) == -1)
+	if (execve(path, full, g_en) == -1)
 	{
 		ft_error(2, full);
-		exit(code);
+		exit(g_code);
 	}
 }

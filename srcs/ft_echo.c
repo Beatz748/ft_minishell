@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 18:38:51 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/01 21:08:26 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/08 06:03:53 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ int		ft_echo(char **full)
 	}
 	if (full[1] && ft_strcmp(full[1], "-n"))
 		write(1, "\n", 1);
-	code = 0;
+	g_code = 0;
 	return (0);
 }

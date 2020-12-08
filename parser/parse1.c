@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 15:21:48 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/07 15:57:38 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/08 06:34:48 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,13 @@ void	ft_do_space(char **new, t_list **tmp, int *res)
 		*res += words_get(new, tmp);
 }
 
+void	ft_somet(int *merge, int *wordlen, int **res)
+{
+	**res += 1;
+	*merge = 0;
+	*wordlen = 1;
+}
+
 void	ft_sign_dollar(char **new, t_list **tmp, int *res)
 {
 	char	*str;
@@ -105,20 +112,16 @@ void	ft_sign_dollar(char **new, t_list **tmp, int *res)
 	int		wordlen;
 	int		merge;
 
-	*res += 1;
 	*new += 1;
-	merge = 0;
-	wordlen = 1;
-	while (*new && **new && **new != ' ' && **new != ';' && **new != '\''
-	&& **new != '\"' && **new != '$' && **new != '>'
-	&& **new != '<' && **new != '|' && **new != '\\')
+	ft_somet(&merge, &wordlen, &res);
+	while (*new && **new && !ft_strchr("; \'\"$><|\\", **new))
 	{
 		*new += 1;
 		wordlen += 1;
 	}
 	str = ft_strndup(*new - wordlen, wordlen);
 	if (str[1] == '?')
-		fin = ft_itoa(code);
+		fin = ft_itoa(g_code);
 	else if (*str == '$' && wordlen == 1)
 		fin = ft_strdup("$");
 	else

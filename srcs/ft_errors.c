@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 14:07:28 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/02 17:57:41 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/08 06:03:53 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_error(int i, char **full)
 		write(1, "unable features", 16);
 	if (i == 2)
 	{
-		code = 127;
+		g_code = 127;
 		ft_putstr_fd("pizza-shell: command not found: ", 1);
 		ft_putstr_fd(full[0], 1);
 	}

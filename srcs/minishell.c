@@ -6,7 +6,7 @@
 /*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 20:49:18 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/08 05:57:34 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/08 06:41:59 by kshantel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ void	ft_nobuiltin(char **full)
 		ft_minishell2(full);
 		return ;
 	}
-	if (execve(my_path, full, en) == -1)
+	if (execve(my_path, full, g_en) == -1)
 	{
 		ft_error(2, full);
-		exit(code);
+		exit(g_code);
 	}
 	free(my_path);
 }
@@ -53,6 +53,14 @@ void	ft_some_dups(char **full, int pipe_in, int pipe_out)
 	dup2(pipe_out, STDOUT_FILENO);
 	if ((ft_check_builtin(full)))
 		ft_nobuiltin(full);
+}
+
+void	ft_exec4(pid_t *pid)
+{
+	int	status;
+
+	waitpid(*pid, &status, 0);
+	g_code = WEXITSTATUS(status);
 }
 
 void	ft_exec(char **full, int pipe_in, int pipe_out)
@@ -71,18 +79,17 @@ void	ft_exec(char **full, int pipe_in, int pipe_out)
 		ft_export(full);
 	else if (!(ft_strcmp(full[0], "exit")))
 		ft_exit(full);
-	else if ((code = (pid = fork())) == 0)
+	else if ((pid = fork()) == 0)
 	{
 		ft_some_dups(full, pipe_in, pipe_out);
-		exit(code);
+		exit(g_code);
 	}
 	else if (pid < 0)
 	{
 		printf("Unable to fork\n");
 		return ;
 	}
-	waitpid(pid, &status, 0);
-	code = WEXITSTATUS(status);
+	ft_exec4(&pid);
 }
 
 void	ft_minishell(void)
@@ -99,11 +106,9 @@ void	ft_minishell(void)
 		write(1, getcwd(dir, MAX_DIR), ft_strlen(getcwd(dir, MAX_DIR)));
 		write(1, ">\033[0m ", 7);
 		if (get_next_line(0, &cmd) == 0)
-		// cmd = "echo \"1\"2 \\$PATH";
-			exit(code);
+			exit(g_code);
 		init_signals(ft_child_signal);
 		ft_parse(cmd);
-		// getchar();
 		free(cmd);
 	}
 }
