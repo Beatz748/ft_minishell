@@ -7,7 +7,6 @@
 	"git.enableSmartCommit": true,
 	"git.confirmSync": false,
 	"explorer.confirmDragAndDrop": false,
-	"window.zoomLevel": 1,
 	"explorer.confirmDelete": false,
 	"files.autoSave": "afterDelay",
 	"workbench.iconTheme": "eq-material-theme-icons-light",

@@ -6,7 +6,7 @@
 /*   By: beatz <beatz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 17:04:04 by kshantel          #+#    #+#             */
-/*   Updated: 2020/12/11 02:22:27 by beatz            ###   ########.fr       */
+/*   Updated: 2020/12/12 19:37:17 by beatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,4 @@ void	ft_parse(char *line)
 		safe = safe->next;
 	}
 	ft_clear_lists(safe, tmp, new);
-	getchar();
 }
