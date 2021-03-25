@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: beatz <beatz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 23:58:13 by kshantel          #+#    #+#             */
-/*   Updated: 2020/12/08 16:31:54 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/13 01:24:19 by beatz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 # define MINISHELL_H
 # include "../utils/utils.h"
 # include "../parser/parse.h"
+# include "../ft_printf/ft_printf.h"
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h>
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <sys/wait.h>

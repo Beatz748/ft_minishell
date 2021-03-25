@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse5.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: beatz <beatz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tbeedril <tbeedril@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 17:04:04 by kshantel          #+#    #+#             */
-/*   Updated: 2020/12/12 19:37:17 by beatz            ###   ########.fr       */
+/*   Updated: 2020/12/12 21:39:42 by tbeedril         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	ft_parse(char *line)
 	i = ft_tokens(new);
 	safe = ft_parse_2(new);
 	ft_exe(safe);
-	while(safe->next)
+	while (safe->next)
 	{
 		free(safe->cntent);
 		safe = safe->next;

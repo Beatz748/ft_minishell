@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbeedril <tbeedril@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 17:32:30 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/08 16:48:10 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/12 21:38:39 by tbeedril         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	ft_escape(char **new, t_list **tmp, int *res)
 	char	*str;
 	int		merge;
 
+	merge = 0;
 	*new += 1;
 	str = ft_strndup(*new, 1);
 	*new += 1;

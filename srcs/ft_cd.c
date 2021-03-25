@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbeedril <tbeedril@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 18:48:00 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/08 06:03:53 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/12 21:38:55 by tbeedril         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int		ft_exec_cd(char **full)
 		return (0);
 	}
 	else if (ft_strlen2(full) > 2)
-		printf("cd: too many arguments\n");
+		ft_printf("cd: too many arguments\n");
 	else if ((g_code = chdir(full[1])) == -1)
-		printf("cd: no such file or directory: %s\n", full[1]);
+		ft_printf("cd: no such file or directory: %s\n", full[1]);
 	return (0);
 }

@@ -3,19 +3,20 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+         #
+#    By: beatz <beatz@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/27 14:49:47 by tbeedril          #+#    #+#              #
-#    Updated: 2020/12/08 17:03:15 by kshantel         ###   ########.fr        #
+#    Updated: 2020/12/13 01:25:54 by beatz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-CC = gcc -g
+CC = gcc
 INCS = -I./parser -I./utils -I./srcs
-CFLAGS = -g $(INCS)
-
+CFLAGS = -g -Wall -Wextra -Werror $(INCS)
+FT_PRINTF = ft_printf
+LIBFTPRINTF = libftprintf
 SRCS = srcs/main.c\
 		./srcs/ft_errors.c\
 		./srcs/ft_exec.c\
@@ -46,17 +47,23 @@ SRCS = srcs/main.c\
 
 OBJS = $(SRCS:.c=.o)
 
-all: $(NAME)
+all: MKPRINTF $(NAME)
+
+MKPRINTF:
+	make -C $(FT_PRINTF)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(INCS) -o $(NAME) $(OBJS) $(INCLIB)
+	$(CC) $(CFLAGS) $(INCS) -o $(NAME) $(OBJS) $(FT_PRINTF)/$(LIBFTPRINTF).a
 
 clean:
 	rm -f $(OBJS)
+	make -C $(FT_PRINTF) clean
 
 fclean: clean
 	rm -f $(NAME)
+	make -C $(FT_PRINTF) fclean
 
 re: fclean all
+	make -C $(FT_PRINTF) fclean
 
 .PHONY: all clean fclean re

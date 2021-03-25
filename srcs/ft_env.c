@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbeedril <tbeedril@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 18:45:55 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/08 07:34:52 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/12 21:39:15 by tbeedril         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		ft_printf_env(void)
 	while (tmp)
 	{
 		if (ft_strcmp(tmp->name, "?"))
-			printf("%s=%s\n", tmp->name, tmp->cntent);
+			ft_printf("%s=%s\n", tmp->name, tmp->cntent);
 		tmp = tmp->next;
 	}
 	g_code = 0;
@@ -56,7 +56,6 @@ char	*ft_true_path(char **full)
 	char		**my_path;
 	char		**split;
 	char		*full_path;
-	char		*tmp;
 
 	if (!(my_path = ft_path()))
 		return (NULL);

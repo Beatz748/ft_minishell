@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbeedril <tbeedril@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 20:49:18 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/08 16:47:06 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/12 21:37:58 by tbeedril         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void	ft_exec4(pid_t *pid)
 void	ft_exec(char **full, int pipe_in, int pipe_out)
 {
 	pid_t	pid;
-	int		status;
 
 	pid = 0;
 	if (full[0] == NULL)
@@ -86,7 +85,7 @@ void	ft_exec(char **full, int pipe_in, int pipe_out)
 	}
 	else if (pid < 0)
 	{
-		printf("Unable to fork\n");
+		ft_printf("Unable to fork\n");
 		return ;
 	}
 	ft_exec4(&pid);

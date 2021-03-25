@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kshantel <kshantel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbeedril <tbeedril@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 19:09:11 by tbeedril          #+#    #+#             */
-/*   Updated: 2020/12/08 16:45:03 by kshantel         ###   ########.fr       */
+/*   Updated: 2020/12/12 21:37:10 by tbeedril         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int		ft_full_init(t_exec *exe, t_list **cmd)
 void	ft_exec2(char **full)
 {
 	pid_t	pid;
-	int		status;
 
 	if (full[0] == NULL)
 		return ;
@@ -63,7 +62,7 @@ void	ft_exec2(char **full)
 	}
 	else if (pid < 0)
 	{
-		printf("Unable to fork\n");
+		ft_printf("Unable to fork\n");
 		return ;
 	}
 	ft_exec4(&pid);
